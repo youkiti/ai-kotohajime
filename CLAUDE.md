@@ -40,6 +40,7 @@ Material for MkDocs + 素のJS(ビルド工程なし・外部ライブラリ/CDN
 - 合格状態: `window.AIK`(storage.js)が管理。localStorage キー `aikotohajime.quiz.<area>.passedAt`(ISO日時)。クイズ合格時に CustomEvent `aik:passed` が発火し、同一ページの目録UIが再描画される
 - クイズJSON: `docs/assets/data/quiz-*.json`。スキーマ `{title, passRatio, questions:[{q, choices[4], answer(正解index), explanation}]}`。B/C領域は `quiz-b.json`/`quiz-c.json` とページ側フックを足すだけで動く(JS変更不要)
 - 読み込み順は mkdocs.yml の extra_javascript で storage.js → quiz.js → certificate.js(依存順。変えない)
+- theme features に `navigation.instant` を追加しないこと(全JSがフルページロード前提の初期化のため、SPA的ページ遷移では描画されなくなる)
 
 ## 設計原則(全実装を拘束する制約)
 

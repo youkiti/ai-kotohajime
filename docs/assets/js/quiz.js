@@ -211,7 +211,10 @@
     summary.appendChild(
       el("p", {
         className: "aik-quiz-score",
-        text: "正答数: " + correctCount + " / " + entries.length + "問(合格ライン: " + passLine + "問以上)"
+        // 自己チェック(gateなし)は合否を持たないため合格ラインを表示しない
+        text: gate
+          ? "正答数: " + correctCount + " / " + entries.length + "問(合格ライン: " + passLine + "問以上)"
+          : "正答数: " + correctCount + " / " + entries.length + "問"
       })
     );
 

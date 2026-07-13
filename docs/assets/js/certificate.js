@@ -358,6 +358,13 @@
 
     var passed = AIK ? AIK.isPassed(area) : false;
 
+    // 解錠済みUIが構築済みなら作り直さない(再合格イベントで入力済みの
+    // 氏名や発行済みプレビューを消してしまわないため)
+    if (passed && container.getAttribute("data-cert-state") === "unlocked") {
+      return;
+    }
+    container.setAttribute("data-cert-state", passed ? "unlocked" : "locked");
+
     container.innerHTML = "";
 
     if (!passed) {
