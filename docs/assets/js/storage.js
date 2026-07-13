@@ -17,6 +17,9 @@
 (function () {
   "use strict";
 
+  // ページの言語("ja" | "en")。html lang属性を参照する(lang-redirect.jsと同じ判定)。
+  var LANG = (document.documentElement.lang || "ja").indexOf("en") === 0 ? "en" : "ja";
+
   var QUIZ_PREFIX = "aikotohajime.quiz.";
   var EXERCISE_PREFIX = "aikotohajime.exercise.";
 
@@ -58,16 +61,86 @@
     delete memoryStore[key];
   }
 
-  // 初級3領域の定義(領域キー: 表示名)
-  var AREAS = {
+  // 初級3領域の定義(領域キー: 表示名)。表示名のみ言語別で、キー(a/b/c)自体は
+  // localStorageキーや領域判定に使うため言語によらず不変。
+  var AREAS_JA = {
     a: "生成AIのメカニズム",
     b: "対話的活用スキル",
     c: "倫理・安全・検証"
   };
+  var AREAS_EN = {
+    a: "How Generative AI Works",
+    b: "Interactive AI Skills",
+    c: "Ethics, Safety, and Verification"
+  };
+  var AREAS = LANG === "en" ? AREAS_EN : AREAS_JA;
   var AREA_KEYS = ["a", "b", "c"];
 
   // 目録発行にクイズ合格に加えて実践課題の提出を要する領域(要件定義書v0.8 §4.6)
   var EXERCISE_AREAS = { b: true };
+
+  // UI文字列(取得状況一覧・リセット確認)の言語別テーブル
+  var I18N = {
+    ja: {
+      statusCompleted: function (label, date) {
+        return "✅ " + label + ": 修了(クイズ合格 " + date + "・実践課題提出済み)";
+      },
+      statusPassed: function (label, date) {
+        return "✅ " + label + ": 合格済み(" + date + ")";
+      },
+      statusQuizPassedPending: function (label) {
+        return "🔶 " + label + ": クイズ合格済み・実践課題の提出待ち";
+      },
+      statusExerciseSubmittedPending: function (label) {
+        return "🔶 " + label + ": 実践課題提出済み・クイズ合格待ち";
+      },
+      statusNotCompleted: function (label) {
+        return "⬜ " + label + ": 未修了";
+      },
+      shokyuReady: "🎓 初級目録: 発行できます",
+      shokyuLocked: "🔒 初級目録: 3領域すべての修了が必要です",
+      resetConfirm:
+        "これまでの記録(領域A・B・Cのクイズ合格と実践課題の提出)をすべて消去します。この操作は取り消せません。よろしいですか?"
+    },
+    en: {
+      statusCompleted: function (label, date) {
+        return "✅ " + label + ": Completed (quiz passed " + date + ", practical exercise submitted)";
+      },
+      statusPassed: function (label, date) {
+        return "✅ " + label + ": Passed (" + date + ")";
+      },
+      statusQuizPassedPending: function (label) {
+        return "🔶 " + label + ": Quiz passed — practical exercise submission pending";
+      },
+      statusExerciseSubmittedPending: function (label) {
+        return "🔶 " + label + ": Practical exercise submitted — quiz pass pending";
+      },
+      statusNotCompleted: function (label) {
+        return "⬜ " + label + ": Not completed";
+      },
+      shokyuReady: "🎓 Beginner Certificate: Ready to issue",
+      shokyuLocked: "🔒 Beginner Certificate: Requires completion of all three areas",
+      resetConfirm:
+        "This will erase all of your records (quiz passes for Areas A, B, and C and the practical exercise submission). This cannot be undone. Continue?"
+    }
+  };
+  var T = I18N[LANG];
+
+  // 英語表記用の月名(Intlに依存せず配列で保持する)
+  var MONTH_NAMES_EN = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
 
   function passedKey(area) {
     return QUIZ_PREFIX + area + ".passedAt";
@@ -167,7 +240,7 @@
     }
   }
 
-  // ISO 8601文字列 -> 「2026年7月13日」形式。不正な値の場合は空文字を返す。
+  // ISO 8601文字列 -> ja「2026年7月13日」/ en「July 13, 2026」形式。不正な値の場合は空文字を返す。
   function formatDate(iso) {
     if (!iso) {
       return "";
@@ -176,12 +249,18 @@
     if (isNaN(d.getTime())) {
       return "";
     }
+    if (LANG === "en") {
+      return MONTH_NAMES_EN[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+    }
     return d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日";
   }
 
-  // 今日の日付を「2026年7月13日」形式で返す
+  // 今日の日付をja「2026年7月13日」/ en「July 13, 2026」形式で返す
   function todayString() {
     var d = new Date();
+    if (LANG === "en") {
+      return MONTH_NAMES_EN[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+    }
     return d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日";
   }
 
@@ -209,8 +288,22 @@
     });
   }
 
+  // 領域キー(a/b/c)から表示ラベルを組み立てる(取得状況一覧・quiz.js・certificate.jsで共用)。
+  // ja: 「領域A「生成AIのメカニズム」」 / en: 「Area A: How Generative AI Works」
+  // a/b/c以外(未知のキーやshokyu)は、そのままareaを返す(呼び出し側でshokyu等は個別対応)。
+  function areaLabel(area) {
+    if (!Object.prototype.hasOwnProperty.call(AREAS, area)) {
+      return area;
+    }
+    if (LANG === "en") {
+      return "Area " + area.toUpperCase() + ": " + AREAS[area];
+    }
+    return "領域" + area.toUpperCase() + "「" + AREAS[area] + "」";
+  }
+
   window.AIK = {
     AREAS: AREAS,
+    lang: LANG,
     passedAt: passedAt,
     isPassed: isPassed,
     setPassed: setPassed,
@@ -221,7 +314,8 @@
     reset: reset,
     formatDate: formatDate,
     todayString: todayString,
-    escapeHtml: escapeHtml
+    escapeHtml: escapeHtml,
+    areaLabel: areaLabel
   };
 
   // --- ここから画面描画(取得状況・消去ボタン) ---
@@ -241,23 +335,23 @@
     for (var i = 0; i < AREA_KEYS.length; i++) {
       var area = AREA_KEYS[i];
       var li = document.createElement("li");
-      var label = "領域" + area.toUpperCase() + "「" + AREAS[area] + "」";
+      var label = areaLabel(area);
       var quizDone = !!passedAt(area);
       var exerciseNeeded = requiresExercise(area);
       var exerciseDone = !!exerciseSubmittedAt(area);
 
       if (isPassed(area)) {
         li.textContent = exerciseNeeded
-          ? "✅ " + label + ": 修了(クイズ合格 " + formatDate(passedAt(area)) + "・実践課題提出済み)"
-          : "✅ " + label + ": 合格済み(" + formatDate(passedAt(area)) + ")";
+          ? T.statusCompleted(label, formatDate(passedAt(area)))
+          : T.statusPassed(label, formatDate(passedAt(area)));
         li.className = "aik-status-passed";
       } else if (exerciseNeeded && (quizDone || exerciseDone)) {
         li.textContent = quizDone
-          ? "🔶 " + label + ": クイズ合格済み・実践課題の提出待ち"
-          : "🔶 " + label + ": 実践課題提出済み・クイズ合格待ち";
+          ? T.statusQuizPassedPending(label)
+          : T.statusExerciseSubmittedPending(label);
         li.className = "aik-status-partial";
       } else {
-        li.textContent = "⬜ " + label + ": 未修了";
+        li.textContent = T.statusNotCompleted(label);
         li.className = "aik-status-unpassed";
       }
       ul.appendChild(li);
@@ -265,10 +359,10 @@
 
     var shokyuLi = document.createElement("li");
     if (allPassed()) {
-      shokyuLi.textContent = "🎓 初級目録: 発行できます";
+      shokyuLi.textContent = T.shokyuReady;
       shokyuLi.className = "aik-status-passed";
     } else {
-      shokyuLi.textContent = "🔒 初級目録: 3領域すべての修了が必要です";
+      shokyuLi.textContent = T.shokyuLocked;
       shokyuLi.className = "aik-status-unpassed";
     }
     ul.appendChild(shokyuLi);
@@ -288,9 +382,7 @@
     var buttons = document.querySelectorAll("[data-reset-progress]");
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener("click", function () {
-        var ok = window.confirm(
-          "これまでの記録(領域A・B・Cのクイズ合格と実践課題の提出)をすべて消去します。この操作は取り消せません。よろしいですか?"
-        );
+        var ok = window.confirm(T.resetConfirm);
         if (!ok) {
           return;
         }

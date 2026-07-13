@@ -1,0 +1,39 @@
+{
+  "title": "Unit B-1 Self-Check (3 questions, for confirming understanding -- no pass/fail record is saved)",
+  "passRatio": 0.8,
+  "questions": [
+    {
+      "q": "What is the basic mindset for approaching generative AI when the first output doesn't match what you expected?",
+      "choices": [
+        "A prompt must be written perfectly the first time -- if it fails, there's no way to try again",
+        "The basic approach is interactive: keep giving additional instructions on the output to improve it",
+        "An unexpected output means something is broken, so you should stop and contact support instead of trying anything further",
+        "Resending the same question in a more forceful tone improves the output"
+      ],
+      "answer": 1,
+      "explanation": "Generative AI is not \"a machine that gives the right answer in one shot\"; it's a tool whose output you grow through dialogue. The basic approach is to treat the first output as a rough draft, tell the AI what's missing, and repeat the process of improvement."
+    },
+    {
+      "q": "Which of the following is the most appropriate example of providing context (background information)?",
+      "choices": [
+        "Saying, \"The audience is 10 first-year new hires, the time limit is 30 minutes, and the goal is learning the procedure safely\"",
+        "Politely greeting the AI with, \"Thank you in advance for your help\"",
+        "Urging it along with, \"Please hurry as much as you can\"",
+        "Mentioning a personal hobby unrelated to the task"
+      ],
+      "answer": 0,
+      "explanation": "Context refers to the background information and constraints -- such as the audience, purpose, time, and length -- that determine the direction of the output. Politeness or requests for speed don't help tailor the content of the output to your workplace."
+    },
+    {
+      "q": "Which of the following follow-up instructions is most likely to lead to a real improvement in the output?",
+      "choices": [
+        "\"Please make it better\"",
+        "\"Something's off\"",
+        "\"The second item is too difficult for the audience. Please replace the technical terms with plain language\"",
+        "\"Please redo the whole thing\""
+      ],
+      "answer": 2,
+      "explanation": "The more specifically you state \"what\" is wrong and \"how\" you'd like it fixed, the more targeted the improvement will be. With \"make it better\" or \"something's off,\" the AI can only guess at what to change."
+    }
+  ]
+}

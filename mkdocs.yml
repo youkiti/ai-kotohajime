@@ -21,11 +21,37 @@ theme:
     - content.tabs.link
 
 plugins:
+  - i18n:  # 日英2言語ビルド(suffix方式: 原文の隣の .en.md/.en.json が英語版。en は /en/ 配下)
+      docs_structure: suffix
+      fallback_to_default: true  # 未翻訳ページは日本語で /en/ に補完(--strict でも警告にならない)
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: ja
+          name: 日本語
+          default: true
+          build: true
+        - locale: en
+          name: English
+          build: true
+          site_name: "AI Kotohajime"
+          site_description: "A self-study site on generative AI for healthcare professionals"
+          copyright: "AI Kotohajime (mock version) — This site collects no user logs"
+          nav_translations:
+            ホーム: Home
+            使い方: How to Use
+            学習ユニット: Learning Units
+            領域A メカニズム: "Area A: How Generative AI Works"
+            領域B 対話スキル: "Area B: Interactive AI Skills"
+            領域C 倫理・安全・検証: "Area C: Ethics, Safety, and Verification"
+            目録(修了証): "Certificate (Mokuroku)"
+            フィードバックAI: Feedback AI
+            教員の方へ: For Teachers
+            このサイトについて: About This Site
   - search
   - git-revision-date-localized:  # 各ページ末尾に最終更新日時を表示(git履歴からビルド時に埋め込み。外部通信なし)
       type: datetime
       timezone: Asia/Tokyo
-      locale: ja
 
 markdown_extensions:
   - admonition
@@ -40,6 +66,7 @@ extra_css:
   - assets/css/extra.css
 
 extra_javascript:
+  - assets/js/lang-redirect.js
   - assets/js/storage.js
   - assets/js/quiz.js
   - assets/js/exercise.js

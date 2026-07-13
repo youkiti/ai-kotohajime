@@ -1,0 +1,39 @@
+{
+  "title": "Unit A-1 Self-Check (3 questions, for confirming understanding -- no pass/fail record is saved)",
+  "passRatio": 0.8,
+  "questions": [
+    {
+      "q": "Which of the following correctly describes something generative AI does NOT do when producing text?",
+      "choices": [
+        "Construct text based on statistical patterns acquired during training",
+        "Probabilistically predict the next word from the context",
+        "Always directly access an external website to fact-check, every time it responds",
+        "Reflect tendencies in the variety of writing styles it saw during training"
+      ],
+      "answer": 2,
+      "explanation": "Most general-purpose generative AI systems do not always access an external website to fact-check every time they generate a response (with the exception of some tools that incorporate search functionality). What the AI actually does at the moment it produces text is probabilistically predict and arrange the next word from the context, based on statistical patterns it acquired during training (options 1, 2, and 4). Note that 'learning patterns' itself happens during the prior training phase, not at the moment the text is produced."
+    },
+    {
+      "q": "A medical student said, \"Generative AI is conscious and thinks for itself to choose its answers.\" Which of the following is the most appropriate response to this statement?",
+      "choices": [
+        "That is correct -- AI thinks autonomously, just like a human",
+        "AI has no consciousness or understanding; it merely calculates the probability of the next word based on statistical patterns it has learned",
+        "AI has no consciousness, but it does have emotions",
+        "AI's \"thinking\" is always more accurate than that of a human physician"
+      ],
+      "answer": 1,
+      "explanation": "Current generative AI does not possess consciousness or understanding; it merely calculates the probability of the next word from the vast amount of text it has learned and generates output based on that calculation. Claims that it 'thinks autonomously' (option 1), 'has emotions' (option 3), or is 'always more accurate than a physician' (option 4) are all mistaken forms of anthropomorphizing or overestimating AI."
+    },
+    {
+      "q": "Which of the following, framed in terms of how LLMs work, best explains why it is particularly dangerous to use generative AI output as-is without checking it?",
+      "choices": [
+        "Because AI always automatically reflects the latest medical guidelines, no checking is necessary",
+        "AI is not a mechanism that guarantees factual accuracy -- it merely generates a plausible-sounding sequence of words -- so incorrect information can be output as perfectly natural-sounding text",
+        "Because the content of AI output is legally guaranteed, no checking is necessary",
+        "Because AI always displays a warning if there is an error, no checking is necessary"
+      ],
+      "answer": 1,
+      "explanation": "Generative AI is not a mechanism for verifying factual accuracy; it probabilistically generates plausible-sounding text based on its training data. As a result, even incorrect content can be output as natural, persuasive-sounding text, which is why checking the content (fact-checking) is indispensable. The premise behind options 1, 3, and 4 -- that correctness is automatically guaranteed -- is mistaken in every case."
+    }
+  ]
+}

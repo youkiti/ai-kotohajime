@@ -21,6 +21,109 @@
   // 以後はこのローカル変数のみを参照する(bareなグローバル参照に依存しない)。
   var AIK = window.AIK || null;
 
+  // ページの言語("ja" | "en")。AIKがあればそれに合わせ、無ければhtml lang属性を参照する。
+  var LANG = AIK && AIK.lang ? AIK.lang : (document.documentElement.lang || "ja").indexOf("en") === 0 ? "en" : "ja";
+
+  // UI文字列(採点結果・注記・エラー等)の言語別テーブル
+  var I18N = {
+    ja: {
+      qNum: function (n) {
+        return "問" + n;
+      },
+      listSep: "、",
+      submitBtn: "採点する",
+      unansweredWarning: function (list) {
+        return "⚠ 未回答の問題があります: " + list;
+      },
+      correct: "✅ 正解",
+      incorrect: function (correctText) {
+        return "❌ 不正解(正解: " + correctText + ")";
+      },
+      explanation: function (text) {
+        return "解説: " + text;
+      },
+      scoreWithGate: function (correct, total, passLine) {
+        return "正答数: " + correct + " / " + total + "問(合格ライン: " + passLine + "問以上)";
+      },
+      scoreNoGate: function (correct, total) {
+        return "正答数: " + correct + " / " + total + "問";
+      },
+      passExercisePending:
+        "🎉 合格です! 目録の発行には実践課題の提出も必要です。下の「実践課題の提出」に進んでください。",
+      pass: "🎉 合格です! 下の「目録の発行」に進んでください。",
+      fail: function (needed) {
+        return "合格まであと" + needed + "問。解説を読んでもう一度挑戦しましょう(回数無制限)。";
+      },
+      unsupportedBrowser:
+        "⚠ お使いのブラウザは対応していないため、クイズを表示できません。ブラウザを最新の状態に更新してください。",
+      loading: "クイズを読み込んでいます…",
+      loadError: function (label) {
+        return "⚠ " + label + "クイズの読み込みに失敗しました。ページを再読み込みするか、しばらく経ってから再度お試しください。";
+      },
+      alreadyPassedNote: function (date) {
+        return (
+          "✅ この領域は合格済みです(" + date + ")。目録は下の「目録の発行」から何度でも発行できます。"
+        );
+      },
+      quizPassedExercisePendingNote: function (date) {
+        return "✅ クイズは合格済みです(" + date + ")。目録の発行には、下の「実践課題の提出」も必要です。";
+      }
+    },
+    en: {
+      qNum: function (n) {
+        return "Q" + n;
+      },
+      listSep: ", ",
+      submitBtn: "Check answers",
+      unansweredWarning: function (list) {
+        return "⚠ Some questions are unanswered: " + list;
+      },
+      correct: "✅ Correct",
+      incorrect: function (correctText) {
+        return "❌ Incorrect (correct answer: " + correctText + ")";
+      },
+      explanation: function (text) {
+        return "Explanation: " + text;
+      },
+      scoreWithGate: function (correct, total, passLine) {
+        return "Score: " + correct + " / " + total + " (pass line: " + passLine + " or more)";
+      },
+      scoreNoGate: function (correct, total) {
+        return "Score: " + correct + " / " + total;
+      },
+      passExercisePending:
+        "🎉 You passed! To issue the certificate, you also need to submit the practical exercise below.",
+      pass: "🎉 You passed! Continue to “Issue Certificate” below.",
+      fail: function (needed) {
+        return (
+          "You need " + needed + " more correct answer(s) to pass. Review the explanations and try again (unlimited retries)."
+        );
+      },
+      unsupportedBrowser: "⚠ Your browser is not supported and the quiz cannot be displayed. Please update your browser.",
+      loading: "Loading the quiz…",
+      loadError: function (label) {
+        return label
+          ? "⚠ Failed to load the " + label + " quiz. Reload the page or try again later."
+          : "⚠ Failed to load the quiz. Reload the page or try again later.";
+      },
+      alreadyPassedNote: function (date) {
+        return (
+          "✅ You have already passed this area (" +
+          date +
+          "). You can reissue the certificate anytime from “Issue Certificate” below."
+        );
+      },
+      quizPassedExercisePendingNote: function (date) {
+        return (
+          "✅ You have passed the quiz (" +
+          date +
+          "). To issue the certificate, you also need to submit the practical exercise below."
+        );
+      }
+    }
+  };
+  var T = I18N[LANG];
+
   function ready(fn) {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", fn);
@@ -52,16 +155,18 @@
   function spacedList(nums) {
     return nums
       .map(function (n) {
-        return "問" + n;
+        return T.qNum(n);
       })
-      .join("、");
+      .join(T.listSep);
   }
 
+  // 領域キー(gate)から表示ラベルを組み立てる。AIK.areaLabel()に一本化する
+  // (AIKが無い、またはAIK.AREASに未知のキーの場合は既存どおりgate自体を返す)。
   function areaLabelFor(gate) {
     if (!AIK || !AIK.AREAS || !AIK.AREAS[gate]) {
       return gate;
     }
-    return "領域" + gate.toUpperCase() + "「" + AIK.AREAS[gate] + "」";
+    return AIK.areaLabel(gate);
   }
 
   function buildQuiz(container, data, gate) {
@@ -76,15 +181,9 @@
     if (gate && AIK && AIK.passedAt(gate)) {
       var noteText;
       if (AIK.isPassed(gate)) {
-        noteText =
-          "✅ この領域は合格済みです(" +
-          AIK.formatDate(AIK.passedAt(gate)) +
-          ")。目録は下の「目録の発行」から何度でも発行できます。";
+        noteText = T.alreadyPassedNote(AIK.formatDate(AIK.passedAt(gate)));
       } else {
-        noteText =
-          "✅ クイズは合格済みです(" +
-          AIK.formatDate(AIK.passedAt(gate)) +
-          ")。目録の発行には、下の「実践課題の提出」も必要です。";
+        noteText = T.quizPassedExercisePendingNote(AIK.formatDate(AIK.passedAt(gate)));
       }
       var note = el("p", { className: "aik-quiz-passed-note", text: noteText });
       container.appendChild(note);
@@ -106,7 +205,7 @@
     for (var i = 0; i < questions.length; i++) {
       (function (q, idx) {
         var fieldset = el("fieldset", { className: "aik-quiz-question" });
-        var legend = el("legend", { text: "問" + (idx + 1) + ". " + q.q });
+        var legend = el("legend", { text: T.qNum(idx + 1) + ". " + q.q });
         fieldset.appendChild(legend);
 
         var choicesWrap = el("div", { className: "aik-quiz-choices" });
@@ -139,7 +238,7 @@
     var submitBtn = document.createElement("button");
     submitBtn.type = "button";
     submitBtn.className = "md-button md-button--primary";
-    submitBtn.textContent = "採点する";
+    submitBtn.textContent = T.submitBtn;
     form.appendChild(submitBtn);
 
     var summary = el("div", { className: "aik-quiz-summary" });
@@ -169,7 +268,7 @@
     }
 
     if (unanswered.length > 0) {
-      warning.textContent = "⚠ 未回答の問題があります: " + spacedList(unanswered);
+      warning.textContent = T.unansweredWarning(spacedList(unanswered));
       warning.removeAttribute("hidden");
       summary.setAttribute("hidden", "hidden");
       return;
@@ -191,21 +290,21 @@
 
       if (isCorrect) {
         entry.fieldset.className = "aik-quiz-question aik-quiz-question--correct";
-        entry.feedback.appendChild(el("p", { className: "aik-quiz-feedback-header", text: "✅ 正解" }));
+        entry.feedback.appendChild(el("p", { className: "aik-quiz-feedback-header", text: T.correct }));
       } else {
         entry.fieldset.className = "aik-quiz-question aik-quiz-question--incorrect";
         var correctText = q.choices[q.answer];
         entry.feedback.appendChild(
           el("p", {
             className: "aik-quiz-feedback-header",
-            text: "❌ 不正解(正解: " + correctText + ")"
+            text: T.incorrect(correctText)
           })
         );
       }
 
       if (q.explanation) {
         entry.feedback.appendChild(
-          el("p", { className: "aik-quiz-explanation", text: "解説: " + q.explanation })
+          el("p", { className: "aik-quiz-explanation", text: T.explanation(q.explanation) })
         );
       }
     }
@@ -220,8 +319,8 @@
         className: "aik-quiz-score",
         // 自己チェック(gateなし)は合否を持たないため合格ラインを表示しない
         text: gate
-          ? "正答数: " + correctCount + " / " + entries.length + "問(合格ライン: " + passLine + "問以上)"
-          : "正答数: " + correctCount + " / " + entries.length + "問"
+          ? T.scoreWithGate(correctCount, entries.length, passLine)
+          : T.scoreNoGate(correctCount, entries.length)
       })
     );
 
@@ -231,9 +330,7 @@
         resultP.className += " aik-quiz-result-message--pass";
         var exercisePending =
           AIK && AIK.requiresExercise(gate) && !AIK.exerciseSubmittedAt(gate);
-        resultP.textContent = exercisePending
-          ? "🎉 合格です! 目録の発行には実践課題の提出も必要です。下の「実践課題の提出」に進んでください。"
-          : "🎉 合格です! 下の「目録の発行」に進んでください。";
+        resultP.textContent = exercisePending ? T.passExercisePending : T.pass;
         if (AIK) {
           AIK.setPassed(gate);
           try {
@@ -245,7 +342,7 @@
       } else {
         resultP.className += " aik-quiz-result-message--fail";
         var needed = passLine - correctCount;
-        resultP.textContent = "合格まであと" + needed + "問。解説を読んでもう一度挑戦しましょう(回数無制限)。";
+        resultP.textContent = T.fail(needed);
       }
       summary.appendChild(resultP);
     }
@@ -259,15 +356,11 @@
     }
 
     if (typeof fetch !== "function") {
-      renderMessage(
-        container,
-        "aik-quiz-error",
-        "⚠ お使いのブラウザは対応していないため、クイズを表示できません。ブラウザを最新の状態に更新してください。"
-      );
+      renderMessage(container, "aik-quiz-error", T.unsupportedBrowser);
       return;
     }
 
-    renderMessage(container, "aik-quiz-loading", "クイズを読み込んでいます…");
+    renderMessage(container, "aik-quiz-loading", T.loading);
 
     fetch(src)
       .then(function (res) {
@@ -283,12 +376,15 @@
         buildQuiz(container, data, gate);
       })
       .catch(function () {
-        var label = gate ? areaLabelFor(gate) + "の" : "";
-        renderMessage(
-          container,
-          "aik-quiz-error",
-          "⚠ " + label + "クイズの読み込みに失敗しました。ページを再読み込みするか、しばらく経ってから再度お試しください。"
-        );
+        var label;
+        if (!gate) {
+          label = "";
+        } else if (LANG === "en") {
+          label = "Area " + gate.toUpperCase();
+        } else {
+          label = areaLabelFor(gate) + "の";
+        }
+        renderMessage(container, "aik-quiz-error", T.loadError(label));
       });
   }
 

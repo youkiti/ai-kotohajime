@@ -1,0 +1,116 @@
+{
+  "title": "Area A Quiz: How Generative AI Works (10 questions, pass with 80% or higher)",
+  "passRatio": 0.8,
+  "questions": [
+    {
+      "q": "Which of the following best describes how generative AI (a large language model, or LLM) produces text?",
+      "choices": [
+        "It probabilistically predicts and arranges the word (token) most likely to come next, based on the preceding context",
+        "It searches a database of text it has learned and returns matching passages",
+        "It selects the closest match from a set of response patterns prepared in advance by humans",
+        "It connects to the internet and looks up the latest information each time, then summarizes it"
+      ],
+      "answer": 0,
+      "explanation": "An LLM learns statistical patterns from a huge volume of pre-training text, and generates continuations by probabilistically selecting the 'most likely next word' given the input context. It does not search a literature database and return matching passages (option 2), nor does it select from a fixed set of response templates (option 3); nor do most general-purpose generative AI systems connect to the internet to look up the latest information every time they respond (option 4)."
+    },
+    {
+      "q": "A resident entered the same question into a generative AI twice, and the second response came back somewhat different from the first. Which of the following best explains this?",
+      "choices": [
+        "Because the AI \"learned\" from the first interaction and improved its answer the second time",
+        "Because AI responses involve a degree of probabilistic variability (sampling) each time, so the wording and details can vary",
+        "Because server congestion caused the quality of the response to drop",
+        "Because the AI is designed to lie at random"
+      ],
+      "answer": 1,
+      "explanation": "Most generative AI systems don't simply choose the single highest-probability word each time; they build in a degree of variability (sampling). That's why the same input doesn't always produce exactly the same text. This is not because the AI \"learned and improved its answer\" (option 1), nor because server congestion degraded quality (option 3), nor because it deliberately generates falsehoods (option 4)."
+    },
+    {
+      "q": "A colleague explained that \"generative AI searches a huge medical literature database and returns the matching passage as a direct quotation.\" Which of the following best identifies the flaw in this explanation?",
+      "choices": [
+        "Generative AI uses the same technology as a search engine, so the explanation is not wrong",
+        "The correct point is that, because generative AI has no database, it should not be able to answer anything at all",
+        "In reality, rather than searching, it generates the next word each time based on patterns learned from a vast amount of text, so it is not necessarily quoting the original passage itself",
+        "It is wrong because generative AI always provides the URL of the primary source"
+      ],
+      "answer": 2,
+      "explanation": "Generative AI does not, like a search engine, search a literature database and quote the matching passage; instead, based on patterns it acquired for plausible ways to continue a passage, it newly generates text each time. As a result, the output does not necessarily match any real, existing passage. The explanation that it uses the same technology as a search engine (option 1), the claim that it should be unable to answer anything because it has no database (option 2), and the claim that it always provides a primary-source URL (option 4) are all inconsistent with how it actually works."
+    },
+    {
+      "q": "Which of the following best describes the basic mechanism of image-generation AI (diffusion models)?",
+      "choices": [
+        "It uses the exact same \"predict the next word\" mechanism as text-generation AI, predicting pixels one at a time",
+        "It searches a database of existing images and displays a combination of the ones closest to the instructions",
+        "It builds a 3D model internally and renders it as a two-dimensional image",
+        "It repeats a process of starting from an image containing random noise and gradually removing that noise to restore an image"
+      ],
+      "answer": 3,
+      "explanation": "A diffusion model works by starting from an image containing random noise and progressively removing that noise, restoring an image that approximates the given instructions. This differs from the word-by-word prediction mechanism of text-generation AI (option 1); it is not a matter of searching and combining existing images (option 2); nor does it involve building a 3D model internally (option 3)."
+    },
+    {
+      "q": "A nursing student said, \"Text-generation AI and image-generation AI work by the same mechanism.\" Which of the following is the most appropriate response to this statement?",
+      "choices": [
+        "Text-generation AI (LLM) works by probabilistically predicting the next word, whereas image-generation AI (diffusion models) works by gradually restoring an image from noise -- the underlying principles are different",
+        "The two work by the same mechanism, so no correction is needed",
+        "Image-generation AI has a simpler mechanism",
+        "Because LLMs cannot handle images at all, the comparison itself does not hold"
+      ],
+      "answer": 0,
+      "explanation": "Text-generation AI (LLM) works by probabilistically predicting the next word, while image-generation AI (diffusion models) works by gradually restoring an image from noise -- the two operate on different principles. The statement that they work 'by the same mechanism' therefore needs to be corrected (option 2 is wrong). Comparing which mechanism is simpler (option 3) and claiming that LLMs cannot handle images at all (option 4) are also not appropriate."
+    },
+    {
+      "q": "Which of the following, framed in terms of how LLMs work, best explains why generative AI can output factually incorrect information (hallucination) in a plausible-sounding way?",
+      "choices": [
+        "Rather than \"searching for and returning correct information,\" AI probabilistically generates a plausible-sounding sequence of words, so it can generate content that differs from fact as long as it is grammatically and contextually natural",
+        "Because the AI's training data is always outdated, errors are bound to occur",
+        "Because developers deliberately mix in incorrect information",
+        "Hallucination is a rare malfunction that does not normally occur"
+      ],
+      "answer": 0,
+      "explanation": "An LLM does not \"search for and return correct information\"; rather, it probabilistically generates a sequence of words that is contextually plausible. As a result, content that differs from fact (hallucination) can be generated plausibly as long as it is grammatically and contextually natural -- a trait that is inherently difficult to avoid given how the mechanism works. It is not caused by training data always being outdated (option 2) or by developers deliberately mixing in false information (option 3); and it is not a rare malfunction but rather a phenomenon that can occur with some regularity (option 4 is wrong)."
+    },
+    {
+      "q": "A resident asked a generative AI to search for references, and it presented a paper with specific author names, a journal name, and even a volume/issue number. However, that paper did not actually exist. Which of the following best explains this situation?",
+      "choices": [
+        "The AI deliberately tried to deceive the resident",
+        "Because AI always presents only references that actually exist, this situation could not occur",
+        "Because the AI has learned the formatting patterns of real papers, it can generate a nonexistent paper in a plausible format that makes it look as if it really exists",
+        "Because the database being searched was temporarily down, a substitute reference was displayed instead"
+      ],
+      "answer": 2,
+      "explanation": "Generative AI has learned the formatting patterns of bibliographic information (author names, journal names, volume/issue numbers, etc.) for real papers, so it can generate bibliographic information in a plausible format in response to a request. As a result, a nonexistent paper can be presented as if it genuinely existed. This is not deliberate deception (option 1), and the premise that \"AI always presents only references that actually exist\" is false (option 2). The explanation that a substitute reference was displayed because the database was down also does not match how the mechanism actually works (option 4)."
+    },
+    {
+      "q": "Which of the following situations is most likely to lead to hallucination?",
+      "choices": [
+        "When asking about common terms that appear repeatedly in textbooks, such as \"hypertension\" or \"diabetes\"",
+        "When asking about content unrelated to medicine, such as greetings or small talk",
+        "Only the very first time you use a generative AI",
+        "When asking about matters that appear infrequently in the training data and are therefore prone to being vague -- such as minor proper nouns, specific figures, or the source of a particular reference"
+      ],
+      "answer": 3,
+      "explanation": "Hallucination is especially likely to occur when you ask about matters prone to being vague -- minor proper nouns, specific figures, the source of a particular reference, and other things that appear infrequently in the training data. It tends to be relatively stable for common, frequently occurring terms (option 1) or for small talk unrelated to medicine (option 2), and it is not a phenomenon limited to right after you start using the AI (option 3)."
+    },
+    {
+      "q": "Which of the following correctly describes what generative AI can create?",
+      "choices": [
+        "Only text -- it cannot generate images, audio, or program code",
+        "Some generative AI can produce a variety of formats beyond text, including images, slide drafts, program code, and audio",
+        "It is specialized exclusively for audio and cannot generate text",
+        "It can generate video and images, but cannot summarize text"
+      ],
+      "answer": 1,
+      "explanation": "Some generative AI systems can produce not only text but also images, slide outlines, program code, audio, and other varied formats (multimodal). Describing generative AI as text-only (option 1), audio-only (option 3), or unable to summarize (option 4) all improperly generalize the characteristics of some generative AI systems to all of them, and none of these descriptions is appropriate."
+    },
+    {
+      "q": "A nurse is considering how to use generative AI in her work. Which of the following is the most appropriate example?",
+      "choices": [
+        "Entering a discharge summary as-is, including the patient's real name and chart number, and having the AI produce a summary",
+        "Using AI-generated medical content directly for patient explanations without verifying it",
+        "Having the AI draft a general in-hospital training document (a slide outline) that contains no patient information, and personally checking and revising the final content",
+        "Delegating the final decision on a treatment plan to the generative AI"
+      ],
+      "answer": 2,
+      "explanation": "Having the AI draft a general document containing no patient information, then personally checking and revising the final content before use, is an example of an appropriate professional use of generative AI. On the other hand, entering personal information such as a patient's real name or chart number as-is (option 1), using AI-generated content directly for patient explanations without verifying it (option 2), and delegating the actual decision on a treatment plan to the AI (option 4) are all problematic from a safety and ethical standpoint."
+    }
+  ]
+}

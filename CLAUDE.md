@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **モック実装済み(A・B領域が実動)。** 全ページの骨格があり、A領域(Unit A-1 本文・領域Aクイズ10問・目録)と B領域(Unit B-1/B-2 本文・領域Bクイズ5問・実践課題の提出・目録)が動作する。A-2・C領域はプレースホルダ。
 
 正本ドキュメント(実装より優先。仕様変更はまずここに反映):
-- `documents/AI事始-要件定義書-v0.8.md` — 要件・技術構成・MVP/モック定義(v0.7 以前は旧版)
+- `documents/AI事始-要件定義書-v0.9.md` — 要件・技術構成・MVP/モック定義・英語版(i18n)仕様(v0.8 以前は旧版)
 - `documents/AI事始-初級コンピテンシー-v0.3.md` — 学習目標(A/B/C領域)とユニット構成(v0.2 は旧版)
 - `documents/AI事始-参考資料-JSME-ICTシンポジウム-v0.2.md` — 外部参考資料の対応表の正本(リンクのみ掲載・転載禁止・確認日を記録。v0.1 は旧版)
 
@@ -34,14 +34,19 @@ uv venv .venv; uv pip install --python .venv\Scripts\python.exe -r requirements.
 
 Material for MkDocs + 素のJS(ビルド工程なし・外部ライブラリ/CDN/外部通信ゼロ)。**ページ(md)とJSはデータ属性で疎結合**になっており、この契約を崩さないこと:
 
-- `<div data-quiz-src="../../assets/data/quiz-a.json" data-quiz-gate="a">` — クイズ描画(quiz.js)。`data-quiz-gate`(領域キー a/b/c)があると合格が記録される。無ければ自己チェック(合否なし)。パスは directory URL 基準の相対(units/quiz 配下からは `../../assets/...`)
-- `<div data-exercise-gate="b" data-exercise-marker="【AI事始 講評】" data-exercise-minlength="100">` — 実践課題の提出UI(exercise.js)。検証はマーカー(固定見出し)を含む+最低文字数のテキスト存在確認のみ。**貼付テキストは保存せず提出日時のみ記録**。マーカー文字列は `docs/feedback.md` の採点プロンプトが出力させる見出しと一致させること(変更時は両方を直す)
+- `<div data-quiz-src="../../assets/data/quiz-a.json" data-quiz-gate="a">` — クイズ描画(quiz.js)。`data-quiz-gate`(領域キー a/b/c)があると合格が記録される。無ければ自己チェック(合否なし)。パスは directory URL 基準の相対(units/quiz 配下からは `../../assets/...`)。`data-quiz-src` のパスは日英で同一のまま書く(suffix方式のアセットローカライズにより `/en/` ビルドでは自動的に対応する `.en.json` の中身が配置される)
+- `<div data-exercise-gate="b" data-exercise-marker="【AI事始 講評】" data-exercise-minlength="100">` — 実践課題の提出UI(exercise.js)。検証はマーカー(固定見出し)を含む+最低文字数のテキスト存在確認のみ。**貼付テキストは保存せず提出日時のみ記録**。マーカー文字列は exercise.js の既定値 / ページの `data-exercise-marker` / `docs/feedback.md` の採点プロンプトが出力させる見出しの3点で同期させること(変更時は3箇所とも直す)。英語版は `[AI Kotohajime Feedback]`(一字一句固定)で、exercise.js(既定値)/ `quiz/b.en.md` の `data-exercise-marker` / `feedback.en.md` の採点プロンプトの3点同期が対になる。英語版の最低文字数は `data-exercise-minlength="200"`(日本語版は100のまま)
 - `<div data-cert-area="a" data-cert-locked="...">` — 目録発行UI(certificate.js)。area は a/b/c/shokyu(初級目録=3領域修了で解錠)。未達時は locked 文言を表示
 - `<div data-mokuroku-status>` / `<button data-reset-progress>` — 取得状況一覧/記録消去(storage.js)
-- 修了状態: `window.AIK`(storage.js)が管理。localStorage キーは `aikotohajime.quiz.<area>.passedAt` と `aikotohajime.exercise.<area>.submittedAt`(いずれもISO日時)。**`AIK.isPassed(area)` は「クイズ合格 AND(実践課題必須領域なら)課題提出」の領域修了判定**で、クイズ単体の合否は `AIK.passedAt(area)`。実践課題を要する領域は storage.js の `EXERCISE_AREAS`(現在 b のみ)で定義。クイズ合格・課題提出のたびに CustomEvent `aik:passed` が発火し、同一ページの取得状況・目録UIが再描画される
+- 修了状態: `window.AIK`(storage.js)が管理。localStorage キーは `aikotohajime.quiz.<area>.passedAt` と `aikotohajime.exercise.<area>.submittedAt`(いずれもISO日時)。**`AIK.isPassed(area)` は「クイズ合格 AND(実践課題必須領域なら)課題提出」の領域修了判定**で、クイズ単体の合否は `AIK.passedAt(area)`。実践課題を要する領域は storage.js の `EXERCISE_AREAS`(現在 b のみ)で定義。クイズ合格・課題提出のたびに CustomEvent `aik:passed` が発火し、同一ページの取得状況・目録UIが再描画される。これらの進捗キーは**日本語版・英語版で共有**する(言語別に分けない)
 - クイズJSON: `docs/assets/data/quiz-*.json`。スキーマ `{title, passRatio, questions:[{q, choices[4], answer(正解index), explanation}]}`。問題数は A/C=10問・B=5問(合格ラインは `ceil(問題数×passRatio)` で自動計算)。C領域は `quiz-c.json` とページ側フックを足すだけで動く(JS変更不要)
-- 読み込み順は mkdocs.yml の extra_javascript で storage.js → quiz.js → exercise.js → certificate.js(依存順。変えない)
+- 多言語化(i18n): **mkdocs-static-i18n** の suffix 方式。`.en.md` / `.en.json` を原文の隣に置くと英語版になる(例: `b1.md` に対して `b1.en.md`)。日本語サイトはルート、英語ページは `/en/` 配下に生成され、未翻訳ページは日本語版で補完される(fallback_to_default)
+- `.en.md` 内のサイト内リンクは**基底ファイル名**で書く(`b1.md` であって `b1.en.md` ではない。プラグインが言語別ビルド時に解決する)
+- 言語設定: localStorage キー `aikotohajime.lang`(値は `ja`/`en`)。`lang-redirect.js` が初回訪問時のみ `navigator.language` で自動判定・リダイレクトし、以後は自動リダイレクトしない。ヘッダーの言語セレクタで手動切替すると同キーが上書きされる。`AIK.reset()`(storage.js)ではこのキーは消えない
+- JS内のUI文字列は各ファイル内の `I18N = {ja, en}` テーブルで管理し、`document.documentElement.lang` で切替する
+- 読み込み順は mkdocs.yml の extra_javascript で lang-redirect.js → storage.js → quiz.js → exercise.js → certificate.js(依存順。変えない。lang-redirect.js は AIK 非依存のため先頭)
 - theme features に `navigation.instant` を追加しないこと(全JSがフルページロード前提の初期化のため、SPA的ページ遷移では描画されなくなる)
+- 日本語ページ(md/json)を更新したら、隣の `.en.md` / `.en.json` も更新すること(保守原則3参照)
 
 ## 設計原則(全実装を拘束する制約)
 
@@ -61,6 +66,7 @@ Material for MkDocs + 素のJS(ビルド工程なし・外部ライブラリ/CDN
 - 目録: Canvas→PNGのみ(jsPDF不採用)。氏名は自由入力(ニックネーム可)。SNS共有は Web Share API + X intent(文面のみ、画像は手動添付)の2段構え。個別画像のOGPはサーバが要るため不採用
 - B領域は職種別(医師/看護/薬学)タブで題材のみ差し替え、構造・クイズ・採点プロンプトは共通
 - 目録は公式な研修証憑ではない旨をサイトと目録画像の両方に明記
+- 英語版(i18n): mkdocs-static-i18n の suffix 方式(`.en.md`/`.en.json`)。クイズ合格・課題提出の進捗は言語間で共有。ブラウザ言語による自動振り分けは初回訪問時のみ(判定後は `aikotohajime.lang` に従う)。英語版実践課題の最低文字数は200。目録は和風意匠を維持し文言のみ英語化(要件定義書 §4.8)
 
 ## ドキュメント規約
 
