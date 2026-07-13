@@ -1,11 +1,13 @@
 /*!
  * AI事始(AIことはじめ) - storage.js
  *
- * localStorageへのクイズ合格状態の保存・読み出しを担う共通モジュール。
- * window.AIK として他のスクリプト(quiz.js / certificate.js)から利用される。
+ * localStorageへのクイズ合格状態・実践課題提出記録の保存・読み出しを担う
+ * 共通モジュール。window.AIK として他のスクリプト(quiz.js / exercise.js /
+ * certificate.js)から利用される。
  *
  * 設計方針:
  * - サーバへは一切送信しない。保存先はこの端末のlocalStorageのみ。
+ *   保存するのは日時のみで、実践課題の貼り付けテキスト自体は保存しない。
  * - localStorageが使えない環境(プライベートブラウズ等)でも例外で
  *   ページ全体が壊れないよう、すべての読み書きをtry/catchで保護する。
  *   その場合は保存が効かないだけで、機能自体はそのセッション内で動作継続する
@@ -15,7 +17,8 @@
 (function () {
   "use strict";
 
-  var STORAGE_PREFIX = "aikotohajime.quiz.";
+  var QUIZ_PREFIX = "aikotohajime.quiz.";
+  var EXERCISE_PREFIX = "aikotohajime.exercise.";
 
   // localStorageが使えない場合のフォールバック(このタブ・セッション限り)
   var memoryStore = {};
@@ -63,11 +66,28 @@
   };
   var AREA_KEYS = ["a", "b", "c"];
 
+  // 目録発行にクイズ合格に加えて実践課題の提出を要する領域(要件定義書v0.8 §4.6)
+  var EXERCISE_AREAS = { b: true };
+
   function passedKey(area) {
-    return STORAGE_PREFIX + area + ".passedAt";
+    return QUIZ_PREFIX + area + ".passedAt";
   }
 
-  // 指定領域の合格日時(ISO 8601文字列)。未合格ならnull。
+  function exerciseKey(area) {
+    return EXERCISE_PREFIX + area + ".submittedAt";
+  }
+
+  function nowIso() {
+    var iso;
+    try {
+      iso = new Date().toISOString();
+    } catch (e) {
+      iso = "" + new Date().getTime();
+    }
+    return iso;
+  }
+
+  // 指定領域のクイズ合格日時(ISO 8601文字列)。未合格ならnull。
   function passedAt(area) {
     if (!Object.prototype.hasOwnProperty.call(AREAS, area)) {
       return null;
@@ -76,15 +96,37 @@
     return v ? v : null;
   }
 
-  // 指定領域が合格済みかどうか。area === "shokyu" の場合は3領域すべての合格(allPassed)を返す。
+  // 指定領域が実践課題を要するか
+  function requiresExercise(area) {
+    return !!EXERCISE_AREAS[area];
+  }
+
+  // 指定領域の実践課題提出日時(ISO 8601文字列)。未提出ならnull。
+  function exerciseSubmittedAt(area) {
+    if (!requiresExercise(area)) {
+      return null;
+    }
+    var v = storageGet(exerciseKey(area));
+    return v ? v : null;
+  }
+
+  // 指定領域の修了要件をすべて満たしたか(= 目録を発行できるか)。
+  // クイズ合格に加え、実践課題を要する領域では提出も必要。
+  // area === "shokyu" の場合は3領域すべての修了(allPassed)を返す。
   function isPassed(area) {
     if (area === "shokyu") {
       return allPassed();
     }
-    return !!passedAt(area);
+    if (!passedAt(area)) {
+      return false;
+    }
+    if (requiresExercise(area) && !exerciseSubmittedAt(area)) {
+      return false;
+    }
+    return true;
   }
 
-  // 指定領域を合格済みとして記録する。既に合格済みの場合は日時を上書きしない。
+  // 指定領域のクイズを合格済みとして記録する。既に合格済みの場合は日時を上書きしない。
   function setPassed(area) {
     if (!Object.prototype.hasOwnProperty.call(AREAS, area)) {
       return;
@@ -92,29 +134,36 @@
     if (passedAt(area)) {
       return;
     }
-    var iso;
-    try {
-      iso = new Date().toISOString();
-    } catch (e) {
-      iso = "" + new Date().getTime();
-    }
-    storageSet(passedKey(area), iso);
+    storageSet(passedKey(area), nowIso());
   }
 
-  // 初級3領域すべてが合格済みか
+  // 指定領域の実践課題を提出済みとして記録する。既に提出済みの場合は日時を上書きしない。
+  // 貼り付けテキスト自体は受け取らない(保存しない)設計。
+  function setExerciseSubmitted(area) {
+    if (!requiresExercise(area)) {
+      return;
+    }
+    if (exerciseSubmittedAt(area)) {
+      return;
+    }
+    storageSet(exerciseKey(area), nowIso());
+  }
+
+  // 初級3領域すべてが修了済みか
   function allPassed() {
     for (var i = 0; i < AREA_KEYS.length; i++) {
-      if (!passedAt(AREA_KEYS[i])) {
+      if (!isPassed(AREA_KEYS[i])) {
         return false;
       }
     }
     return true;
   }
 
-  // すべての合格記録を消去する
+  // すべての記録(クイズ合格・実践課題提出)を消去する
   function reset() {
     for (var i = 0; i < AREA_KEYS.length; i++) {
       storageRemove(passedKey(AREA_KEYS[i]));
+      storageRemove(exerciseKey(AREA_KEYS[i]));
     }
   }
 
@@ -165,6 +214,9 @@
     passedAt: passedAt,
     isPassed: isPassed,
     setPassed: setPassed,
+    requiresExercise: requiresExercise,
+    exerciseSubmittedAt: exerciseSubmittedAt,
+    setExerciseSubmitted: setExerciseSubmitted,
     allPassed: allPassed,
     reset: reset,
     formatDate: formatDate,
@@ -190,11 +242,22 @@
       var area = AREA_KEYS[i];
       var li = document.createElement("li");
       var label = "領域" + area.toUpperCase() + "「" + AREAS[area] + "」";
+      var quizDone = !!passedAt(area);
+      var exerciseNeeded = requiresExercise(area);
+      var exerciseDone = !!exerciseSubmittedAt(area);
+
       if (isPassed(area)) {
-        li.textContent = "✅ " + label + ": 合格済み(" + formatDate(passedAt(area)) + ")";
+        li.textContent = exerciseNeeded
+          ? "✅ " + label + ": 修了(クイズ合格 " + formatDate(passedAt(area)) + "・実践課題提出済み)"
+          : "✅ " + label + ": 合格済み(" + formatDate(passedAt(area)) + ")";
         li.className = "aik-status-passed";
+      } else if (exerciseNeeded && (quizDone || exerciseDone)) {
+        li.textContent = quizDone
+          ? "🔶 " + label + ": クイズ合格済み・実践課題の提出待ち"
+          : "🔶 " + label + ": 実践課題提出済み・クイズ合格待ち";
+        li.className = "aik-status-partial";
       } else {
-        li.textContent = "⬜ " + label + ": 未合格";
+        li.textContent = "⬜ " + label + ": 未修了";
         li.className = "aik-status-unpassed";
       }
       ul.appendChild(li);
@@ -205,7 +268,7 @@
       shokyuLi.textContent = "🎓 初級目録: 発行できます";
       shokyuLi.className = "aik-status-passed";
     } else {
-      shokyuLi.textContent = "🔒 初級目録: 3領域すべての合格が必要です";
+      shokyuLi.textContent = "🔒 初級目録: 3領域すべての修了が必要です";
       shokyuLi.className = "aik-status-unpassed";
     }
     ul.appendChild(shokyuLi);
@@ -226,7 +289,7 @@
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener("click", function () {
         var ok = window.confirm(
-          "これまでのクイズ合格記録(領域A・B・Cの合否)をすべて消去します。この操作は取り消せません。よろしいですか?"
+          "これまでの記録(領域A・B・Cのクイズ合格と実践課題の提出)をすべて消去します。この操作は取り消せません。よろしいですか?"
         );
         if (!ok) {
           return;
@@ -242,7 +305,8 @@
     wireResetButtons();
   });
 
-  // 目録が別スクリプト(certificate.js)からlocalStorageを更新した直後にも
-  // 取得状況表示を更新できるよう、合格イベントでも再描画する。
+  // クイズ合格・実践課題提出が別スクリプト(quiz.js / exercise.js)から
+  // localStorageを更新した直後にも取得状況表示を更新できるよう、
+  // 状態変化イベントでも再描画する。
   document.addEventListener("aik:passed", renderAllStatus);
 })();

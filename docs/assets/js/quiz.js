@@ -71,15 +71,22 @@
 
     container.innerHTML = "";
 
-    // 既に合格済みの領域クイズには、上部に注記を出す(クイズ自体は再挑戦可能なまま残す)
-    if (gate && AIK && AIK.isPassed(gate)) {
-      var note = el("p", {
-        className: "aik-quiz-passed-note",
-        text:
+    // 既に合格済みの領域クイズには、上部に注記を出す(クイズ自体は再挑戦可能なまま残す)。
+    // 実践課題を要する領域では、クイズ合格済みでも課題が未提出なら次の一歩を案内する。
+    if (gate && AIK && AIK.passedAt(gate)) {
+      var noteText;
+      if (AIK.isPassed(gate)) {
+        noteText =
           "✅ この領域は合格済みです(" +
           AIK.formatDate(AIK.passedAt(gate)) +
-          ")。目録は下の「目録の発行」から何度でも発行できます。"
-      });
+          ")。目録は下の「目録の発行」から何度でも発行できます。";
+      } else {
+        noteText =
+          "✅ クイズは合格済みです(" +
+          AIK.formatDate(AIK.passedAt(gate)) +
+          ")。目録の発行には、下の「実践課題の提出」も必要です。";
+      }
+      var note = el("p", { className: "aik-quiz-passed-note", text: noteText });
       container.appendChild(note);
     }
 
@@ -222,7 +229,11 @@
       var resultP = el("p", { className: "aik-quiz-result-message" });
       if (passed) {
         resultP.className += " aik-quiz-result-message--pass";
-        resultP.textContent = "🎉 合格です! 下の「目録の発行」に進んでください。";
+        var exercisePending =
+          AIK && AIK.requiresExercise(gate) && !AIK.exerciseSubmittedAt(gate);
+        resultP.textContent = exercisePending
+          ? "🎉 合格です! 目録の発行には実践課題の提出も必要です。下の「実践課題の提出」に進んでください。"
+          : "🎉 合格です! 下の「目録の発行」に進んでください。";
         if (AIK) {
           AIK.setPassed(gate);
           try {

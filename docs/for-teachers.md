@@ -4,7 +4,7 @@
 
 本サイトは、学習者(研修医・学生等)が一人で学び、フィードバックを受け、修了証(目録)まで自己発行できるように設計されています。教員・指導医の皆さまにお願いすることは、学習者に下記のようなリンクを送ることだけです。
 
-現在モックとして実際に体験できるのは[Unit A-1](units/a1.md)と[領域Aクイズ](quiz/a.md)です。
+現在モックとして実際に体験できるのは、領域A([Unit A-1](units/a1.md)・[領域Aクイズ](quiz/a.md))と領域B([Unit B-1](units/b1.md)・[Unit B-2](units/b2.md)・[領域Bクイズと実践課題](quiz/b.md))です。
 
 ## 課題として案内するときの文例
 
@@ -47,7 +47,7 @@ Slackやメールにそのままコピーしてお使いください。
 
 日本医学教育学会 ICT教育委員会シンポジウムの講演資料のうち、教員・指導者の視点から参考になるものです。
 
-- [淺田義和「生成AIの活用と教育評価」(第1回, 2025-11-20)](https://drive.google.com/file/d/1HZhwCgS2MBEDt37O32xGlXlAMidHgiC-/view?usp=drive_link)
-- [小林直人「医学生がレポート課題で生成AIを使ってみた件」(第1回, 2025-11-20)](https://drive.google.com/file/d/11b9Z0BHMkceGIs_5gJVQ9222jcDvpJGP/view?usp=drive_link)
-- [山本憲「AIの教育利用〜学生教育にAIをどう活用していくか、レポート評価へのAI活用の課題〜」(第2回, 2025-12-16)](https://drive.google.com/file/d/1bBwVpAG3LvQslTfxyaFZ81xjGWtv7aU0/view?usp=drive_link)
-- [村岡千種「生成AIの学生利用に関する大学の取り組み」(第3回, 2026-01-20)](https://drive.google.com/file/d/1iOFH7QOvgGMj6DgrZc1QHKHpiRYR2n6i/view?usp=sharing)
+- 淺田義和「生成AIの活用と教育評価」(第1回, 2025-11-20): [スライドPDF](https://drive.google.com/file/d/1HZhwCgS2MBEDt37O32xGlXlAMidHgiC-/view?usp=drive_link) / [講演動画](https://vimeo.com/1144019584/0451c59dfb)
+- 小林直人「医学生がレポート課題で生成AIを使ってみた件」(第1回, 2025-11-20): [スライドPDF](https://drive.google.com/file/d/11b9Z0BHMkceGIs_5gJVQ9222jcDvpJGP/view?usp=drive_link) / [講演動画](https://vimeo.com/1144018542/035db34416)
+- 山本憲「AIの教育利用〜学生教育にAIをどう活用していくか、レポート評価へのAI活用の課題〜」(第2回, 2025-12-16): [スライドPDF](https://drive.google.com/file/d/1bBwVpAG3LvQslTfxyaFZ81xjGWtv7aU0/view?usp=drive_link) / [講演動画](https://vimeo.com/1149299342/77f8d31256)
+- 村岡千種「生成AIの学生利用に関する大学の取り組み」(第3回, 2026-01-20): [スライドPDF](https://drive.google.com/file/d/1iOFH7QOvgGMj6DgrZc1QHKHpiRYR2n6i/view?usp=sharing) / [講演動画](https://vimeo.com/1157137327/fb98ac33f6)

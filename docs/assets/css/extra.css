@@ -200,6 +200,48 @@
   margin-bottom: 0.6em;
 }
 
+/* ---------- 実践課題(領域B) ---------- */
+
+.aik-exercise-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4em;
+  color: var(--md-default-fg-color, inherit);
+}
+
+.aik-exercise-textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.4em;
+  padding: 0.6em 0.75em;
+  border: 1px solid var(--md-default-fg-color--lightest, #ccc);
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: inherit;
+  background: var(--md-default-bg-color, #fff);
+  color: var(--md-default-fg-color, inherit);
+  resize: vertical;
+}
+
+.aik-exercise-hint {
+  font-size: 0.8em;
+  color: var(--md-default-fg-color--light, #767676);
+  margin: 0.45em 0 1em;
+}
+
+.aik-exercise-error {
+  color: #b7282e;
+  font-weight: 600;
+}
+
+.aik-exercise-submitted {
+  padding: 0.6em 1em;
+  border: 1px solid #2e7d32;
+  background: rgba(46, 125, 50, 0.08);
+  border-radius: 4px;
+  color: var(--md-default-fg-color, inherit);
+}
+
 /* ---------- 取得状況(初級目録ステータス) ---------- */
 
 .aik-mokuroku-status-list {
@@ -215,6 +257,10 @@
 
 .aik-status-passed {
   color: #2e7d32;
+}
+
+.aik-status-partial {
+  color: #b26a00;
 }
 
 .aik-status-unpassed {

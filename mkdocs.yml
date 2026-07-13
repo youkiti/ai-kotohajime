@@ -38,6 +38,7 @@ extra_css:
 extra_javascript:
   - assets/js/storage.js
   - assets/js/quiz.js
+  - assets/js/exercise.js
   - assets/js/certificate.js
 
 nav:

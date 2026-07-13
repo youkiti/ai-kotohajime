@@ -54,15 +54,19 @@
 
   function bodyText(area) {
     if (area === "shokyu") {
-      return "上記の者は、AI事始における初級全領域(領域A・領域B・領域C)の確認クイズにすべて合格したことをここに記す。";
+      return "上記の者は、AI事始における初級全領域(領域A・領域B・領域C)の修了要件をすべて満たしたことをここに記す。";
     }
-    return (
+    var base =
       "上記の者は、AI事始における領域" +
       area.toUpperCase() +
       "「" +
       areaDisplayName(area) +
-      "」の確認クイズに合格したことをここに記す。"
-    );
+      "」の確認クイズに合格し";
+    // 実践課題を要する領域(領域B)は、目録本文にも課題の修了を反映する
+    if (AIK && AIK.requiresExercise && AIK.requiresExercise(area)) {
+      return base + "、実践課題を修了したことをここに記す。";
+    }
+    return base + "たことをここに記す。";
   }
 
   function spacedTitle(area) {
