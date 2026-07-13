@@ -1,0 +1,222 @@
+/*
+ * AI事始(AIことはじめ) - extra.css
+ *
+ * クイズ・目録(修了証)・取得状況表示まわりの最小限のスタイル。
+ * Material for MkDocsのCSS変数(--md-...)を可能な範囲で使い、
+ * ライト/ダーク(slate)配色でも破綻しないようにする。
+ */
+
+/* ---------- クイズ ---------- */
+
+.aik-quiz-loading {
+  color: var(--md-default-fg-color--light, #666);
+}
+
+.aik-quiz-error {
+  padding: 0.75em 1em;
+  border-radius: 4px;
+  color: var(--md-default-fg-color, inherit);
+  background: rgba(183, 40, 46, 0.08);
+  border: 1px solid #b7282e;
+}
+
+.aik-quiz-title {
+  font-size: 1.15em;
+  margin-bottom: 0.6em;
+}
+
+.aik-quiz-passed-note {
+  padding: 0.6em 1em;
+  border: 1px solid #2e7d32;
+  background: rgba(46, 125, 50, 0.08);
+  border-radius: 4px;
+  color: var(--md-default-fg-color, inherit);
+  margin-bottom: 1em;
+}
+
+.aik-quiz-form {
+  margin-top: 0.5em;
+}
+
+.aik-quiz-question {
+  border: 1px solid var(--md-default-fg-color--lightest, #ccc);
+  border-radius: 6px;
+  padding: 0.8em 1em 1em;
+  margin: 0 0 1.2em;
+}
+
+.aik-quiz-question legend {
+  font-weight: 600;
+  padding: 0 0.4em;
+  color: var(--md-default-fg-color, inherit);
+}
+
+.aik-quiz-question--correct {
+  border-color: #2e7d32;
+  background: rgba(46, 125, 50, 0.07);
+}
+
+.aik-quiz-question--incorrect {
+  border-color: #b7282e;
+  background: rgba(183, 40, 46, 0.07);
+}
+
+.aik-quiz-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+  margin-top: 0.6em;
+}
+
+.aik-quiz-choice {
+  display: block;
+  padding: 0.55em 0.9em;
+  border: 1px solid var(--md-default-fg-color--lightest, #ddd);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--md-default-fg-color, inherit);
+}
+
+.aik-quiz-choice:hover {
+  background: var(--md-code-bg-color, rgba(0, 0, 0, 0.04));
+}
+
+.aik-quiz-choice input {
+  margin-right: 0.7em;
+  cursor: pointer;
+}
+
+.aik-quiz-warning {
+  color: #b7282e;
+  font-weight: 600;
+}
+
+.aik-quiz-feedback {
+  margin-top: 0.75em;
+  padding-top: 0.55em;
+  border-top: 1px dashed var(--md-default-fg-color--lightest, #ccc);
+}
+
+.aik-quiz-feedback-header {
+  font-weight: 600;
+  margin: 0 0 0.3em;
+  color: var(--md-default-fg-color, inherit);
+}
+
+.aik-quiz-explanation {
+  margin: 0;
+  color: var(--md-default-fg-color--light, inherit);
+}
+
+.aik-quiz-summary {
+  margin-top: 1em;
+  padding: 0.85em 1em;
+  border-radius: 6px;
+  background: var(--md-code-bg-color, rgba(0, 0, 0, 0.04));
+}
+
+.aik-quiz-score {
+  font-weight: 600;
+  margin: 0 0 0.35em;
+  color: var(--md-default-fg-color, inherit);
+}
+
+.aik-quiz-result-message {
+  margin: 0;
+}
+
+.aik-quiz-result-message--pass {
+  color: #2e7d32;
+  font-weight: 700;
+}
+
+.aik-quiz-result-message--fail {
+  color: #b7282e;
+  font-weight: 700;
+}
+
+/* ---------- 目録(修了証) ---------- */
+
+.aik-cert-locked {
+  padding: 0.85em 1em;
+  border-radius: 6px;
+  background: var(--md-code-bg-color, rgba(0, 0, 0, 0.04));
+  color: var(--md-default-fg-color--light, inherit);
+}
+
+.aik-cert-issue {
+  margin-top: 0.5em;
+}
+
+.aik-cert-name-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.7em;
+  color: var(--md-default-fg-color, inherit);
+}
+
+.aik-cert-name-input {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin-top: 0.4em;
+  padding: 0.55em 0.75em;
+  border: 1px solid var(--md-default-fg-color--lightest, #ccc);
+  border-radius: 4px;
+  font-size: 1em;
+  background: var(--md-default-bg-color, #fff);
+  color: var(--md-default-fg-color, inherit);
+}
+
+.aik-cert-hint {
+  font-size: 0.8em;
+  color: var(--md-default-fg-color--light, #767676);
+  margin: 0.45em 0 1em;
+}
+
+.aik-cert-error {
+  color: #b7282e;
+  font-weight: 600;
+}
+
+.aik-cert-result {
+  margin-top: 1.2em;
+}
+
+.aik-cert-preview {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--md-default-fg-color--lightest, #ccc);
+  border-radius: 4px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  display: block;
+  margin-bottom: 1em;
+}
+
+.aik-cert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  margin-bottom: 0.6em;
+}
+
+/* ---------- 取得状況(初級目録ステータス) ---------- */
+
+.aik-mokuroku-status-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.6em 0;
+}
+
+.aik-mokuroku-status-list li {
+  padding: 0.3em 0;
+  color: var(--md-default-fg-color, inherit);
+}
+
+.aik-status-passed {
+  color: #2e7d32;
+}
+
+.aik-status-unpassed {
+  color: var(--md-default-fg-color--light, inherit);
+}

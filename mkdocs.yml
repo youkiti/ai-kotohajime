@@ -1,6 +1,9 @@
 site_name: AI事始
 site_description: 医療者のための生成AI自習サイト
-# site_url: TBD(公開URL・リポジトリ所属は運営名義の決定後に設定)
+site_url: https://youkiti.github.io/ai-kotohajime/  # モック公開先(運営名義の確定までの暫定。§9 TBD)
+repo_url: https://github.com/youkiti/ai-kotohajime
+repo_name: youkiti/ai-kotohajime
+edit_uri: ""
 
 theme:
   name: material

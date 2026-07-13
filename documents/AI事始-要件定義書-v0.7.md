@@ -197,5 +197,5 @@
 2. 監修・レビュー体制 — TBD
 3. Gem提供終了・仕様変更時の代替手順の文書化 — TBD
 4. 画像生成領域の具体的スコープ(Phase 3着手時に再定義) — TBD
-5. 公開URL・GitHubリポジトリの所属(運営名義に依存) — TBD
+5. 公開URL・GitHubリポジトリの所属(運営名義に依存) — TBD。モック段階の暫定公開先は個人アカウント https://github.com/youkiti/ai-kotohajime (Pages: https://youkiti.github.io/ai-kotohajime/)。運営名義確定時に移管を検討
 6. ライセンスの最終確定(CC BY 4.0が候補) — TBD
