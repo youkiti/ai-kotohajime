@@ -1,0 +1,64 @@
+site_name: AI事始
+site_description: 医療者のための生成AI自習サイト
+# site_url: TBD(公開URL・リポジトリ所属は運営名義の決定後に設定)
+
+theme:
+  name: material
+  language: ja
+  palette:
+    scheme: default
+    primary: teal
+    accent: deep orange
+  font: false
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.tabs.link
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_css:
+  - assets/css/extra.css
+
+extra_javascript:
+  - assets/js/storage.js
+  - assets/js/quiz.js
+  - assets/js/certificate.js
+
+nav:
+  - ホーム: index.md
+  - 使い方: how-to-use.md
+  - 学習ユニット:
+      - 領域A メカニズム:
+          - units/a1.md
+          - units/a2.md
+          - quiz/a.md
+      - 領域B 対話スキル:
+          - units/b1.md
+          - units/b2.md
+          - quiz/b.md
+      - 領域C 倫理・安全・検証:
+          - units/c1.md
+          - units/c2.md
+          - quiz/c.md
+  - 目録(修了証): mokuroku.md
+  - フィードバックAI: feedback.md
+  - 教員の方へ: for-teachers.md
+  - このサイトについて:
+      - about.md
+      - disclaimer.md
+      - privacy.md
+
+copyright: "AI事始(モック版) — 本サイトはユーザーログを一切収集しません"
