@@ -22,6 +22,10 @@ theme:
 
 plugins:
   - search
+  - git-revision-date-localized:  # 各ページ末尾に最終更新日時を表示(git履歴からビルド時に埋め込み。外部通信なし)
+      type: datetime
+      timezone: Asia/Tokyo
+      locale: ja
 
 markdown_extensions:
   - admonition

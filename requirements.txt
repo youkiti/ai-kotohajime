@@ -1,1 +1,2 @@
 mkdocs-material>=9.5  # サイトジェネレータ本体(Material for MkDocsテーマ、検索・admonition等のプラグインを含む)
+mkdocs-git-revision-date-localized-plugin>=1.2  # 各ページ末尾に最終更新日時を自動表示(git履歴からビルド時に埋め込み。要件定義書 §4.7)
