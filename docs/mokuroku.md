@@ -20,9 +20,9 @@
 
 ## C領域 目録
 
-[領域Cクイズ](quiz/c.md)は準備中です。
+[領域Cクイズ](quiz/c.md)に合格すると発行できます。
 
-<div data-cert-area="c" data-cert-locked="領域Cクイズは準備中です。実装後、8割正解で合格すると発行できます。"></div>
+<div data-cert-area="c" data-cert-locked="領域Cクイズに合格すると発行できます。"></div>
 
 ## 初級目録
 
