@@ -6,9 +6,9 @@
       "q": "What is the most appropriate benefit of instructing generative AI, \"If you need more information, please ask me first\"?",
       "choices": [
         "It prevents the conversation from proceeding with the AI having silently filled in missing assumptions with its own guesses",
-        "It increases the AI's response speed",
-        "The AI will remember your preferences permanently from then on",
-        "It guarantees the medical accuracy of the output"
+        "It makes the AI feel faster to work with, since more back-and-forth exchanges take place",
+        "The AI will remember your preferences from then on and apply them automatically next time",
+        "Simply giving the instruction automatically makes the output medically accurate"
       ],
       "answer": 0,
       "explanation": "When information is missing, the AI fills the gaps with guesses to produce its output. Having it ask questions first lets you draw out output based on the actual situation (audience, purpose, constraints) instead of guesswork. This is unrelated to guaranteeing accuracy or to the AI remembering things."
@@ -16,10 +16,10 @@
     {
       "q": "When having generative AI critique your own deliverable, which approach is most appropriate for drawing out candid feedback?",
       "choices": [
-        "Asking, \"Please tell me only the good parts\"",
-        "Specifying the role, number, and format: \"As a strict reviewer, point out the 3 most important things to improve, in order of importance, with reasons\"",
-        "Showing it the same piece repeatedly until you get an evaluation you're happy with",
-        "Not asking the AI at all, since critique can only be requested from a human"
+        "Asking the AI to mention just the positive points, and to leave out anything critical",
+        "Specifying the role and format: \"as a strict reviewer, point out three important things to improve, in order, with reasons\"",
+        "Showing it the same piece again and again, unchanged, until you get an evaluation you like",
+        "Deciding that critique is something only a human expert should provide, not an AI, and skipping the step of asking the AI for feedback"
       ],
       "answer": 1,
       "explanation": "Generative AI tends to respond favorably, so specifying a reviewer role, the number of points, and a requirement to state reasons draws out candid, concrete feedback instead of flattery."
@@ -27,10 +27,10 @@
     {
       "q": "What is the most appropriate way to respond after receiving critique from the AI?",
       "choices": [
-        "Since all of the AI's points are correct, apply every one of them as-is",
-        "Since the AI's points aren't reliable, ignore all of them",
+        "Treat the AI's points as equal in weight to a senior expert's opinion, and apply each point as-is without question or double-checking",
+        "Treat the AI's points as merely a machine's opinion, and dismiss them without even reading them",
         "Judge the validity of each point yourself and adopt the ones you find convincing (the final decision is made by a human)",
-        "Ask the same AI, \"Is that point really correct?\" to settle its correctness"
+        "Ask the same AI whether its own point was correct, and treat that reply as the final word"
       ],
       "answer": 2,
       "explanation": "Even AI critique can include points that are off-base or mistaken. Neither taking the critique at face value nor ignoring it outright is correct -- the right approach is to judge the validity of each point yourself and pick and choose accordingly (this connects to the \"human verification\" you'll learn about in Area C)."
