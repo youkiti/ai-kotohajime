@@ -7,3 +7,6 @@ site/
 # キャッシュ類
 __pycache__/
 .cache/
+
+# Claude Code の個人設定(コミットしない)
+.claude/settings.local.json
