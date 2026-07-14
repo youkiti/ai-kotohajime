@@ -16,24 +16,24 @@
     {
       "q": "Which of the following is the most appropriate example of providing context (background information)?",
       "choices": [
-        "Saying, \"The audience is 10 first-year new hires, the time limit is 30 minutes, and the goal is learning the procedure safely\"",
-        "Politely greeting the AI with, \"Thank you in advance for your help\"",
-        "Urging it along with, \"Please hurry as much as you can\"",
-        "Mentioning a personal hobby unrelated to the task"
+        "Saying, \"The audience is 10 first-year new hires, the time limit is 30 minutes, and the goal is learning the procedure\"",
+        "Repeating polite greetings such as \"thank you very much in advance, I truly appreciate your help\" without ever stating what you actually need",
+        "Urging it along with \"please hurry and finish this as fast as possible\", mentioning nothing but the time pressure",
+        "Describing, in detail, a personal hobby or how you spend your days off, unrelated to the audience or purpose"
       ],
       "answer": 0,
-      "explanation": "Context refers to the background information and constraints -- such as the audience, purpose, time, and length -- that determine the direction of the output. Politeness or requests for speed don't help tailor the content of the output to your workplace."
+      "explanation": "Context refers to the background information and constraints -- such as the audience, purpose, time, and length -- that determine the direction of the output. Greetings or requests for speed don't help tailor the content of the output to your workplace."
     },
     {
       "q": "Which of the following follow-up instructions is most likely to lead to a real improvement in the output?",
       "choices": [
-        "\"Please make it better\"",
-        "\"Something's off\"",
-        "\"The second item is too difficult for the audience. Please replace the technical terms with plain language\"",
-        "\"Please redo the whole thing\""
+        "Saying, \"please make it better\", without stating what specifically should change",
+        "Giving a vague reaction, \"something's off\", without ever explaining why",
+        "Saying, \"the second item is too hard for the audience -- please use plain language instead of technical terms\"",
+        "Saying, \"please redo the whole thing\", without specifying anything that should change"
       ],
       "answer": 2,
-      "explanation": "The more specifically you state \"what\" is wrong and \"how\" you'd like it fixed, the more targeted the improvement will be. With \"make it better\" or \"something's off,\" the AI can only guess at what to change."
+      "explanation": "The more specifically you state \"what\" is wrong and \"how\" you'd like it fixed, the more targeted the improvement will be. With \"make it better,\" \"something's off,\" or \"redo the whole thing,\" the AI can only guess at what to change."
     }
   ]
 }

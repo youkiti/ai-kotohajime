@@ -5,54 +5,54 @@
     {
       "q": "You asked a generative AI to draft materials for a resident study session, but the output came back shallow and full of generalities. What is the most appropriate next step?",
       "choices": [
-        "Conclude that generative AI is not practical and make everything yourself from now on",
-        "Resend the exact same prompt repeatedly until a good output appears",
-        "Tell the AI specifically what is lacking in the output (for example, that the content is too shallow for the intended audience) and instruct it to improve",
-        "Paste the exact same prompt into a different generative AI that is said to be more capable"
+        "Conclude that generative AI is not practical, abandon that approach, and make everything yourself by hand from now on",
+        "Resend the exact same prompt repeatedly without changing it, hoping a good output eventually appears",
+        "Point out specifically what the output is lacking and ask the AI to produce an improved version",
+        "Without reconsidering the prompt, paste the exact same text into a different generative AI said to be more capable"
       ],
       "answer": 2,
-      "explanation": "A conversation with a generative AI is not meant to end after a single exchange. The basic approach is 'iterative improvement' — telling the AI specifically what is lacking and instructing it to improve. Resending the same prompt, or switching tools without changing the prompt, does not tell the AI what needs to be fixed."
+      "explanation": "A conversation with a generative AI is not meant to end after a single exchange. The basic approach is 'iterative improvement' — pointing out specifically what is lacking and asking the AI to improve it. Resending the same prompt, or switching tools without reconsidering the prompt, does not tell the AI what needs to be fixed."
     },
     {
       "q": "You asked only for 'materials to explain something to new staff,' and got a generic result that could apply to any workplace. What additional information would be most appropriate to provide in order to make the output fit your own workplace?",
       "choices": [
-        "A strong request such as 'please make it better'",
-        "Background information and constraints such as the audience, purpose, situation of use, and length",
-        "Flattery such as 'you are the world's best educator'",
-        "The name and address of your workplace's building"
+        "Keep repeating a vague request for improvement, such as 'please make it better'",
+        "Provide background information and constraints such as the audience, purpose, situation of use, and length",
+        "Offer flattering praise to the AI, such as 'you are the world's best educator'",
+        "Provide information unrelated to the content of the materials, such as your workplace's building name and address"
       ],
       "answer": 1,
-      "explanation": "The more context you provide (audience, purpose, constraints, and so on), the more concrete and workplace-specific the output becomes. Saying only 'make it better' does not convey what to change, and information unrelated to the task, such as an address, does not contribute to improvement."
+      "explanation": "The more context you provide (audience, purpose, constraints, and so on), the more concrete and workplace-specific the output becomes. Repeating 'make it better' does not convey what to change, and flattery or an address, which are unrelated to the task, do not contribute to improvement."
     },
     {
       "q": "You had a generative AI draft an annual plan for a study session, and it proposed 60 minutes each time. In reality, you can only secure 30 minutes once a week. What is the most appropriate response?",
       "choices": [
-        "Accept the 60-minute plan as is, and only use the first half when you actually run it",
-        "Give up on creating the plan, since the AI cannot understand time constraints",
-        "Simply comment, 'that won't fit in 30 minutes, will it?'",
+        "Accept the 60-minute plan as is, and improvise on the day by picking out just the first half to use",
+        "Decide that the AI cannot understand time constraints, and give up on creating the plan altogether",
+        "Simply comment, 'that won't fit in 30 minutes, will it?' and wait for the AI to propose something new on its own",
         "Explicitly state the constraint and ask again: 'please restructure this so it works in 30 minutes, once a week'"
       ],
       "answer": 3,
-      "explanation": "If you explicitly state your constraints (time, frequency, format, and so on) and ask again, the AI will rebuild the output to match. Simply commenting does not convey what you want done, and giving up before stating the constraint is premature."
+      "explanation": "If you explicitly state your constraints (time, frequency, format, and so on) and ask again, the AI will rebuild the output to match. Simply commenting and waiting does not convey what you want done, and giving up before stating the constraint is premature."
     },
     {
       "q": "You want a generative AI to create explanatory materials for patients, but you have no idea what information you should provide to get a good result. What would be the most appropriate first prompt?",
       "choices": [
-        "'I want to create patient explanation materials. Please start by asking me what information you need to make them good.'",
-        "'Just make perfect patient explanation materials.'",
-        "'Make all the decisions for me, and don't ask any questions.'",
-        "Don't use generative AI at all until you can fully organize the necessary information yourself"
+        "'I want to create patient explanation materials, so please start by asking me what information you need'",
+        "'Just make perfect patient explanation materials without checking any details with me,' leaving everything to the AI",
+        "'Make every decision for me, and don't ask any questions,' stated as a firm instruction",
+        "Put off using generative AI altogether until you have finished organizing the necessary information in your own head"
       ],
       "answer": 0,
-      "explanation": "When you are not sure what information to provide, it is effective to instruct the AI to ask you about what is missing. The AI will ask about things like the audience, condition, and situation of use, and you only need to answer those questions to supply the necessary context. Leaving everything to the AI with 'make it perfect' just forces it to guess at the missing information."
+      "explanation": "When you are not sure what information to provide, it is effective to instruct the AI to ask you about what is missing. The AI will ask about things like the audience, condition, and situation of use, and you only need to answer those questions to supply the necessary context. Leaving everything to the AI without letting it check details just forces it to guess at the missing information."
     },
     {
       "q": "You showed a generative AI the outline of a presentation slide deck you made and asked for its opinion, but all you got was 'this is a wonderful outline.' What is the most appropriate next step to draw out candid areas for improvement?",
       "choices": [
-        "Since it was praised, proceed to the presentation as is",
-        "Ask again, 'do you really think it's wonderful?'",
-        "Ask again while specifying the role and the output: 'no flattery needed — acting as a harsh peer reviewer, point out three things to improve, in order of importance, with reasons for each'",
-        "Show the same outline repeatedly to see whether the evaluation changes"
+        "Take the praise at face value and go straight into the presentation without revising the outline at all",
+        "Ask the same question again in different words: 'do you really, truly think it's wonderful? please be honest with me'",
+        "Ask again while specifying the role and format: 'no flattery — as a harsh reviewer, list three improvements, in order of importance, with reasons'",
+        "To see whether the evaluation changes, show the same outline again and again without altering a single word of it"
       ],
       "answer": 2,
       "explanation": "Generative AI tends to respond favorably to the user. Specifying a role as a critic, the number of points to raise, and a requirement to give reasons helps draw out candid, concrete feedback. Simply asking again or showing the same material repeatedly tends to produce similarly flattering praise."
