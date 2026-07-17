@@ -78,6 +78,7 @@ extra_javascript:
   - assets/js/quiz.js
   - assets/js/exercise.js
   - assets/js/certificate.js
+  - assets/js/external-links.js
 
 nav:
   - ホーム: index.md
