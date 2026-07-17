@@ -45,7 +45,7 @@ Material for MkDocs + 素のJS(ビルド工程なし・外部ライブラリ/CDN
 - `.en.md` 内のサイト内リンクは**基底ファイル名**で書く(`b1.md` であって `b1.en.md` ではない。プラグインが言語別ビルド時に解決する)
 - 言語設定: localStorage キー `aikotohajime.lang`(値は `ja`/`en`)。`lang-redirect.js` が初回訪問時のみ `navigator.language` で自動判定・リダイレクトし、以後は自動リダイレクトしない。ヘッダーの言語セレクタで手動切替すると同キーが上書きされる。`AIK.reset()`(storage.js)ではこのキーは消えない
 - JS内のUI文字列は各ファイル内の `I18N = {ja, en}` テーブルで管理し、`document.documentElement.lang` で切替する
-- 読み込み順は mkdocs.yml の extra_javascript で lang-redirect.js → storage.js → quiz.js → exercise.js → certificate.js(依存順。変えない。lang-redirect.js は AIK 非依存のため先頭)
+- 読み込み順は mkdocs.yml の extra_javascript で lang-redirect.js → storage.js → quiz.js → exercise.js → certificate.js(依存順。変えない。lang-redirect.js は AIK 非依存のため先頭)。末尾の external-links.js(外部リンクに target="_blank" + rel="noopener" を一律付与)は window.AIK に依存しない独立JSのため読み込み順に制約はない
 - theme features に `navigation.instant` を追加しないこと(全JSがフルページロード前提の初期化のため、SPA的ページ遷移では描画されなくなる)
 - 日本語ページ(md/json)を更新したら、隣の `.en.md` / `.en.json` も更新すること(保守原則3参照)
 
