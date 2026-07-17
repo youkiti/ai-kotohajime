@@ -5,65 +5,65 @@
     {
       "q": "A resident is about to enter the following text into a generative AI: \"78-year-old female, Ms. Hanako Yamada (Patient ID: 0012345). Admitted to XX City Hospital on June 2 for pneumonia. Please draft a discharge summary.\" What is the most significant problem with this input?",
       "choices": [
-        "The text is too short for the AI to generate a discharge summary",
-        "It contains information that could identify the patient -- name, patient ID, admission date, and facility name -- which must not be sent to an external server",
-        "Using AI to draft a discharge summary is itself prohibited by law",
-        "Because an honorific (\"Ms.\") is attached, the AI will mistakenly assume the person is real"
+        "That the passage is too long and complex for the AI to produce a summary",
+        "That it contains information identifying the patient, such as name, patient ID, admission date, and facility",
+        "That using AI to draft a discharge summary is itself banned outright by law",
+        "That the honorific attached to the name will make the AI mistake the person for someone real"
       ],
       "answer": 1,
-      "explanation": "This input contains information that directly identifies an individual -- name, patient ID, admission date, and facility name. Because anything entered into a generative AI is sent to the provider's server, this text must not be sent as written. The issue is not the length of the text (option 1), nor is using AI to draft a summary itself prohibited (option 3). Whether or not an honorific is used is not the essential problem (option 4). Once the personal information has been removed or abstracted, requesting a draft is entirely possible."
+      "explanation": "This input contains information that directly identifies an individual -- name, patient ID, admission date, and facility name. Because anything entered into a generative AI is sent to the provider's server, this text must not be sent as written. The length of the passage is not the issue (option 1), and using AI to draft a summary is not itself banned by law (option 3). Whether an honorific is attached is not the essential problem (option 4). Once the personal information has been removed or abstracted, requesting a draft remains entirely possible."
     },
     {
       "q": "Which of the following best explains why patient information must not be entered into a general-purpose, consumer-facing generative AI service?",
       "choices": [
-        "Because the AI might contact the patient directly",
-        "Because entering the information could cause the hospital's electronic medical record system to stop working",
-        "Because the input is sent to the provider's server, and depending on the service, may be used for model training or quality improvement, or may be seen by people at the provider; and once sent, it cannot be retracted",
-        "Because it slows down the AI's response speed"
+        "Because the AI might use the input to reach out to the patient directly without staff involvement",
+        "Because entering the information might cause the hospital's electronic medical record system to shut down by mistake",
+        "Because the input reaches the provider's server, may be used for training or quality checks, and cannot be retracted",
+        "Because when many users access the service at once, the AI's response speed can temporarily slow down noticeably"
       ],
       "answer": 2,
-      "explanation": "Anything entered into a generative AI is sent over the internet to the provider's server. With general-purpose consumer services, the input may be used for training the model or for quality improvement, and it may be seen by staff at the provider, for example during troubleshooting. Furthermore, there is no way to fully retract content once it has been sent. This is a serious problem from the standpoint of a healthcare professional's duty of confidentiality and the protection of personal information. The AI contacting the patient (option 1), the electronic medical record system stopping (option 2), and response speed (option 4) are not appropriate reasons."
+      "explanation": "Anything entered into a generative AI is sent over the internet to the provider's server. With general-purpose consumer services, the input may be used for training the model or for quality checks, and there is no way for the user to retract content once it has been sent. This is a serious problem from the standpoint of a healthcare professional's duty of confidentiality and the protection of personal information. The AI reaching out to the patient directly (option 1), the electronic medical record system shutting down (option 2), and a noticeable slowdown in response speed (option 4) are reasons unrelated to protecting what was sent."
     },
     {
       "q": "A medical student wants to use a generative AI to help organize a case they encountered, for use at a study session. What is the most appropriate approach?",
       "choices": [
-        "Remove identifiers such as name, ID, dates, and facility name, and convert the age into a decade (e.g., \"in their 70s\") and dates into relative expressions (e.g., \"hospital day 3\"), processing the case into a form where the individual cannot be identified, before entering it",
-        "Replacing the name with initials (e.g., \"Mr. Y.H.\") is enough; everything else can be entered as-is",
-        "Entering it from a hospital computer does not count as sending it externally, so it is fine to enter as-is",
-        "Entering it late at night, when few people are using the service, is safe because no record will remain"
+        "Remove name, ID, dates, and facility name, then convert age and dates so the individual cannot be identified",
+        "Replacing the name with initials, such as \"Mr. Y.H.\", is enough; the rest of the information can stay as it is",
+        "Entering it from a hospital computer instead of a personal device does not count as sending it externally at all",
+        "Entering it late at night, when few other people happen to be using the service, is safe since no record remains"
       ],
       "answer": 0,
-      "explanation": "The appropriate approach is to remove direct identifiers (name, ID, dates, facility name, etc.), then abstract further -- converting age into a decade and dates into relative expressions -- so that the individual cannot be identified, before entering the text. Replacing only the name with initials is not sufficient (option 2), because a combination of a rare disease, age, and region can still identify the individual. Entering data from a hospital computer is still sending it to an external server (option 3). The time of day has nothing to do with whether the input is sent or recorded (option 4)."
+      "explanation": "The appropriate approach is to remove direct identifiers (name, ID, dates, facility name, etc.), then abstract further -- converting age into a decade and dates into relative expressions -- so that the individual cannot be identified, before entering the text. Replacing only the name with initials is not sufficient (option 2), because a combination of a rare disease, age, and region can still identify the individual. Entering data from a hospital computer still counts as sending it to an external server, regardless of which device is used (option 3). The time of day has nothing to do with whether the input is sent or recorded (option 4)."
     },
     {
       "q": "A nurse wants to use an illustration created by a generative AI in an in-hospital awareness poster. What is the most important consideration?",
       "choices": [
-        "Since AI-generated material never raises copyright concerns, it can be used freely without any checking",
-        "All AI-generated material automatically becomes public domain, so simply citing the source is enough",
-        "Check whether the output closely resembles an existing character or work, and also check the terms of service of the tool being used (conditions for commercial and secondary use) before using it",
-        "As long as it is credited as \"AI-generated,\" there is no legal problem even if it closely resembles an existing work"
+        "Since AI-generated material never raises copyright concerns, it can be used freely without checking",
+        "All AI-generated material automatically becomes public domain, so citing the source is enough",
+        "Check whether the output resembles an existing work, and also check the terms of service of the tool being used, before using it",
+        "As long as it is credited as AI-generated, no legal problem arises even if it resembles an existing work"
       ],
       "answer": 2,
-      "explanation": "The output of a generative AI can sometimes closely resemble an existing work or character contained in its training data, and using it as-is could constitute copyright infringement. In addition, the conditions of use (for example, whether commercial use is allowed) are set out in each service's terms of service. Both checking for resemblance to existing works and checking the terms of service are therefore necessary. The claims that AI-generated material never raises copyright issues (option 1), automatically becomes public domain (option 2), or that crediting it as \"AI-generated\" removes any legal problem even if it resembles an existing work (option 4) are all incorrect."
+      "explanation": "The output of a generative AI can sometimes closely resemble an existing work or character contained in its training data, and using it as-is could constitute copyright infringement. In addition, the conditions of use (for example, whether commercial use is allowed) are set out in each service's terms of service, so that also needs checking. The claims that AI-generated material never raises copyright issues (option 1), automatically becomes public domain (option 2), or that crediting it as AI-generated removes any legal problem even if it resembles an existing work (option 4) are all incorrect."
     },
     {
       "q": "A resident wants to enter an entire chapter of a commercially published medical textbook into a generative AI, and print and distribute the resulting summary as a handout for an in-hospital study session. Which of the following best describes this action?",
       "choices": [
-        "Because textbooks are shared property of the medical community, both entering the text and distributing the result are completely free to do",
-        "Once a generative AI is involved, the rights to the original work automatically disappear",
-        "There is no legal difference between a personal study memo and a handout for distribution",
-        "Entering and summarizing someone else's copyrighted work and then distributing it could constitute reproduction or adaptation, so using it for distribution purposes may require careful consideration (such as obtaining the rights holder's permission)"
+        "Textbooks are treated as shared property for medical education, so entering and distributing them freely is fine",
+        "Once the text has passed through the filter of a generative AI, the rights to the original work simply disappear",
+        "There is no legal difference between keeping something as a personal study memo and distributing it as a handout",
+        "Distributing the summary could constitute reproduction or adaptation, requiring the rights holder's permission"
       ],
       "answer": 3,
-      "explanation": "A commercially published textbook is a copyrighted work, and printing and distributing a summary created by entering its content could constitute reproduction or adaptation. Because the legal treatment can differ between using something solely for one's own study and reproducing/distributing it as a handout, careful consideration -- such as obtaining permission from the rights holder -- is needed when the purpose is distribution. The idea that a textbook is \"shared property\" and free to use (option 1), that involving AI erases the original rights (option 2), and that a personal memo and a distributed handout are treated the same way (option 3) are all incorrect."
+      "explanation": "A commercially published textbook is a copyrighted work, and printing and distributing a summary created by entering its content could constitute reproduction or adaptation, so obtaining the rights holder's permission may be necessary before distribution. Because the legal treatment can differ between using something solely for one's own study and reproducing/distributing it as a handout, this careful consideration matters specifically when the purpose is distribution. The idea that a textbook is \"shared property\" and free to use (option 1), that passing it through AI erases the original rights (option 2), and that a personal memo and a distributed handout are treated the same way (option 3) are all incorrect."
     },
     {
       "q": "A generative AI answered, \"According to the 2023 guideline of the XX Society, this treatment is considered first-line.\" What is the most appropriate response?",
       "choices": [
-        "Check the actual guideline itself to confirm whether it exists at all, and whether its content matches the AI's description",
-        "Because a specific society name and year are given, it can be judged to be an accurate, real citation",
-        "Ask the same AI, \"Is that really true?\" and trust it if it answers, \"Yes, it's true\"",
-        "Ask a different generative AI the same question, and if the same answer comes back, consider the check complete"
+        "Always check the guideline itself, confirming that it exists and that its content matches",
+        "Because a specific society name and year are given, it can be judged an accurate, real citation",
+        "Ask the same AI, \"Is that true?\" and trust the answer if it says \"Yes, it's true\"",
+        "Ask a different generative AI the same question, and consider the check complete if the same answer comes back"
       ],
       "answer": 0,
       "explanation": "Generative AI has learned the format and patterns of real documents and citations, so it can present a guideline that does not actually exist, or one that exists but has different content, in a plausible-looking format. Sources must always be checked against the primary source itself, confirming both that it exists and that its content matches. Having a specific society name and year does not guarantee that the citation is real (option 2); asking the same AI to confirm (option 3) or cross-checking with a different AI (option 4) are also not substitutes for checking the primary source."
@@ -71,43 +71,43 @@
     {
       "q": "Which of the following best describes bias in generative AI output?",
       "choices": [
-        "In the latest generative AI models, bias has been completely eliminated as a technical matter",
-        "Because generative AI output reflects biases present in its training data (mainly text from the internet), it must be handled on the assumption that bias is present",
-        "Asking a question in Japanese produces an answer free of bias and suited to conditions in Japan",
-        "Bias is a problem unique to image-generation AI and does not occur with text-generation AI"
+        "Using the latest generative AI, bias has been completely eliminated as a technical matter",
+        "Because generative AI output reflects biases in its training data, it must be handled on the premise that bias is present",
+        "Asking a question in Japanese produces an unbiased answer suited to conditions in Japan",
+        "Bias is a problem unique to AI that generates images, and does not occur in AI that generates text"
       ],
       "answer": 1,
-      "explanation": "Because generative AI produces output that reflects statistical patterns in its training data, biases present in that data -- involving language, region, gender, era, or values -- also appear in the output. This is an inherent, unavoidable characteristic of the mechanism, so output must be handled on the premise that bias is always present. The claim that bias has been completely eliminated as a technical matter (option 1) is incorrect, and asking in Japanese does not resolve biases in the training data (option 3). Bias occurs in both text generation and image generation (option 4)."
+      "explanation": "Because generative AI produces output that reflects statistical patterns in its training data, biases present in that data -- involving language, region, gender, era, or values -- also appear in the output. This is an inherent, unavoidable characteristic of the mechanism, so output must be handled on the premise that bias is present. The claim that bias has been completely eliminated as a technical matter (option 1) is incorrect, and asking in Japanese does not resolve biases in the training data (option 3). Bias occurs in both AI that generates text and AI that generates images (option 4)."
     },
     {
       "q": "When an image-generation AI was asked several times to produce \"an illustration of a doctor and a nurse,\" the doctor was always drawn as a man and the nurse always as a woman. Which of the following best explains this phenomenon?",
       "choices": [
-        "Because the AI looked up the staff composition of the user's own institution and reflected it",
-        "This is an unbiased output that accurately reflects real-world statistics",
-        "This is simply coincidence, and repeating the request will naturally produce a more diverse mix",
-        "This reflects a bias in the training data linking occupation and gender, and the user needs to compensate for it -- for example, by explicitly specifying gender in the prompt"
+        "The AI looked up the actual staff composition of the user's own institution and drew that exact ratio accordingly",
+        "This is simply a neutral output that reflects real-world statistics accurately, without any bias at all",
+        "This is just a chance skew occurring this one time, and repeating the request many times will naturally produce a diverse mix",
+        "This reflects a bias linking occupation and gender in the training data, correctable by specifying gender in the prompt"
       ],
       "answer": 3,
-      "explanation": "Training data contains many instances of biased associations such as \"doctor = male\" and \"nurse = female,\" and these statistical patterns are carried straight through into the output. Once you notice such a bias, you need to compensate for it yourself -- for instance, by explicitly specifying gender or diversity in the prompt. The AI is not looking up the actual staff composition of any institution (option 1), and this cannot be called a neutral output that accurately reflects reality (option 2). Because the bias originates in the underlying data, it will not naturally resolve itself simply by repeating the request (option 3)."
+      "explanation": "Training data contains many instances of biased associations such as \"doctor = male\" and \"nurse = female,\" and these statistical patterns are carried straight through into the output; noticing this bias and correcting for it -- for instance, by explicitly specifying gender or diversity in the prompt -- is the user's responsibility. The AI is not looking up the actual staff composition of any institution (option 1), and this cannot be called a neutral output that accurately reflects reality (option 2). Because the bias originates in the underlying data, repeating the request many times will not naturally resolve it (option 3)."
     },
     {
       "q": "A pharmacist had a generative AI create patient medication guidance materials. Which combination of considerations is most appropriate for verification before distributing the materials?",
       "choices": [
-        "Fact-checking (whether the dosage and administration match the package insert and other primary sources), fit for the intended audience (whether the wording and content will be understood by the patients in mind), and harm potential (whether there is anything that could cause misunderstanding, anxiety, or inappropriate advice)",
-        "Only three things: whether the character count matches the specification, whether there are typos, and whether the font is easy to read",
-        "Only three things: how long it took to generate, the name of the AI used, and the date it was generated",
-        "Having the AI itself confirm, \"Is this material accurate?\" and receiving the answer, \"Yes, it is accurate\""
+        "Check whether the content matches the package insert, the wording suits the audience, and nothing could cause harm",
+        "Check whether the character count matches the specification, whether there are typos, and whether the font reads well",
+        "Keep a record of how long generation took, the name of the AI used, and the date the material was generated",
+        "Have the AI itself confirm whether the material is accurate, and accept its own reassurance as sufficient proof"
       ],
       "answer": 0,
-      "explanation": "Before using generative AI output in clinical work, verification should be based on three considerations: (1) fact-checking -- whether the content matches primary sources such as the package insert or guidelines; (2) fit for the intended audience -- whether the wording and content suit the intended readers (for example, elderly patients or parents of young children); and (3) harm potential -- whether there is anything that could cause misunderstanding, anxiety, inappropriate advice, or discriminatory language. Checking only the formatting (option 2) or the generation record (option 3) cannot guarantee the safety of the content, and asking the AI itself to confirm (option 4) is not a substitute for verification."
+      "explanation": "Before using generative AI output in clinical work, verification should be based on three considerations: whether the content matches primary sources such as the package insert or guidelines (fact-checking); whether the wording and content suit the intended readers, such as elderly patients or parents of young children (fit for the audience); and whether there is anything that could cause misunderstanding, anxiety, inappropriate advice, or discriminatory language (harm potential). Checking only the formatting (option 2) or keeping a generation record (option 3) cannot guarantee the safety of the content, and asking the AI itself to confirm (option 4) is not a substitute for verification."
     },
     {
       "q": "During a busy shift, a generative AI's answer came with specific figures and a confident tone, tempting a resident to use it directly in explaining something to a patient. What is the most appropriate judgment?",
       "choices": [
-        "If the tone sounds confident, accuracy is likely high, so it can be used as-is",
-        "If specific figures are included, it can be considered already verified",
-        "Fluency and a confident-sounding tone are not evidence of correctness, so human verification (fact-checking, fit for the audience, and harm potential) must always be carried out before using the output in clinical work",
-        "Verification may be skipped when the clinician is especially busy"
+        "If the tone sounds confident, accuracy can be judged to be high",
+        "If several specific figures are lined up, the content can be regarded as already verified at that point",
+        "A confident, fluent tone is not evidence of correctness, so human verification is carried out before use",
+        "Verification may be skipped only when the clinician is especially busy"
       ],
       "answer": 2,
       "explanation": "Generative AI is a mechanism for producing plausible-sounding text, so even incorrect content can be output in a fluent, confident-sounding style. Neither tone nor level of detail is evidence of correctness, and human verification (fact-checking, fit for the audience, and harm potential) is mandatory before using output in clinical work. A confident-sounding tone (option 1) or the presence of specific figures (option 2) cannot be taken as grounds that verification is already complete, and being busy is not an accepted reason to skip verification (option 4)."
