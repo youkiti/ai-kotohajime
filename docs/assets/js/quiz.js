@@ -32,9 +32,8 @@
       },
       listSep: "、",
       submitBtn: "採点する",
-      unansweredWarning: function (list) {
-        return "⚠ 未回答の問題があります: " + list;
-      },
+      unansweredWarningPrefix: "⚠ 未回答の問題があります: ",
+      incorrectListPrefix: "不正解: ",
       correct: "✅ 正解",
       incorrect: function (correctText) {
         return "❌ 不正解(正解: " + correctText + ")";
@@ -75,9 +74,8 @@
       },
       listSep: ", ",
       submitBtn: "Check answers",
-      unansweredWarning: function (list) {
-        return "⚠ Some questions are unanswered: " + list;
-      },
+      unansweredWarningPrefix: "⚠ Some questions are unanswered: ",
+      incorrectListPrefix: "Incorrect: ",
       correct: "✅ Correct",
       incorrect: function (correctText) {
         return "❌ Incorrect (correct answer: " + correctText + ")";
@@ -152,12 +150,26 @@
 
   var quizInstanceCounter = 0;
 
-  function spacedList(nums) {
-    return nums
-      .map(function (n) {
-        return T.qNum(n);
-      })
-      .join(T.listSep);
+  // 設問idの命名規則(instanceId + "-question-" + 問番号)を一箇所に集約する。
+  // radioのname(instanceId + "-q" + idx、0始まり)とは別命名にして混同を避ける。
+  function questionAnchorId(instanceId, questionNumber) {
+    return instanceId + "-question-" + questionNumber;
+  }
+
+  // prefix文字列 + 問番号アンカーのリストをDOM要素に組み立てる(未回答警告・不正解一覧で共用)。
+  // JSON由来の文字列をinnerHTMLに入れない方針を維持するため、DOM APIのみで構築する。
+  function renderQuestionListMessage(target, prefix, instanceId, nums) {
+    target.textContent = "";
+    target.appendChild(document.createTextNode(prefix));
+    for (var i = 0; i < nums.length; i++) {
+      if (i > 0) {
+        target.appendChild(document.createTextNode(T.listSep));
+      }
+      var a = document.createElement("a");
+      a.href = "#" + questionAnchorId(instanceId, nums[i]);
+      a.textContent = T.qNum(nums[i]);
+      target.appendChild(a);
+    }
   }
 
   // 領域キー(gate)から表示ラベルを組み立てる。AIK.areaLabel()に一本化する
@@ -205,6 +217,10 @@
     for (var i = 0; i < questions.length; i++) {
       (function (q, idx) {
         var fieldset = el("fieldset", { className: "aik-quiz-question" });
+        // 未回答警告・不正解一覧からアンカーリンクで飛べるように一意なidを振る。
+        // tabindex="-1"はスクリプトからのフォーカス移動のみを許可するため(Tabキー操作の順序には入らない)。
+        fieldset.id = questionAnchorId(instanceId, idx + 1);
+        fieldset.setAttribute("tabindex", "-1");
         var legend = el("legend", { text: T.qNum(idx + 1) + ". " + q.q });
         fieldset.appendChild(legend);
 
@@ -215,6 +231,10 @@
           input.type = "radio";
           input.name = instanceId + "-q" + idx;
           input.value = String(c);
+          // 選択した瞬間に未回答ハイライトを外す(採点し直さなくても視覚的に解消される)。
+          input.addEventListener("change", function () {
+            fieldset.classList.remove("aik-quiz-question--unanswered");
+          });
           label.appendChild(input);
           var span = el("span", { text: q.choices[c] });
           label.appendChild(span);
@@ -256,7 +276,13 @@
     var unanswered = [];
     var answers = [];
 
+    // 前回の採点で付いた未回答ハイライトを一旦すべて除去してから今回分を再判定する
+    // (選択時にも個別に外しているが、ここでも取りこぼしなく揃える)。
     for (var i = 0; i < entries.length; i++) {
+      entries[i].fieldset.classList.remove("aik-quiz-question--unanswered");
+    }
+
+    for (i = 0; i < entries.length; i++) {
       var name = instanceId + "-q" + entries[i].index;
       var checked = form.querySelector('input[name="' + name + '"]:checked');
       if (checked) {
@@ -264,11 +290,12 @@
       } else {
         answers.push(null);
         unanswered.push(entries[i].index + 1);
+        entries[i].fieldset.classList.add("aik-quiz-question--unanswered");
       }
     }
 
     if (unanswered.length > 0) {
-      warning.textContent = T.unansweredWarning(spacedList(unanswered));
+      renderQuestionListMessage(warning, T.unansweredWarningPrefix, instanceId, unanswered);
       warning.removeAttribute("hidden");
       summary.setAttribute("hidden", "hidden");
       return;
@@ -276,6 +303,7 @@
     warning.setAttribute("hidden", "hidden");
 
     var correctCount = 0;
+    var incorrectNums = [];
 
     for (i = 0; i < entries.length; i++) {
       var entry = entries[i];
@@ -293,6 +321,7 @@
         entry.feedback.appendChild(el("p", { className: "aik-quiz-feedback-header", text: T.correct }));
       } else {
         entry.fieldset.className = "aik-quiz-question aik-quiz-question--incorrect";
+        incorrectNums.push(entry.index + 1);
         var correctText = q.choices[q.answer];
         entry.feedback.appendChild(
           el("p", {
@@ -323,6 +352,13 @@
           : T.scoreNoGate(correctCount, entries.length)
       })
     );
+
+    // 不正解一覧はgateの有無(領域クイズ/自己チェック)を問わず表示する。
+    if (incorrectNums.length > 0) {
+      var incorrectP = el("p", { className: "aik-quiz-incorrect-list" });
+      renderQuestionListMessage(incorrectP, T.incorrectListPrefix, instanceId, incorrectNums);
+      summary.appendChild(incorrectP);
+    }
 
     if (gate) {
       var resultP = el("p", { className: "aik-quiz-result-message" });
