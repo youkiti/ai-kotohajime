@@ -2,8 +2,8 @@
 
 **A self-study site on generative AI for healthcare professionals**
 
-!!! warning "This is a mock version (Areas A and B are functional)"
-    The site currently published is a mock version for reviewing the site structure. You can actually complete the learning activities and issue a certificate for **Area A: How Generative AI Works** and **Area B: Interactive AI Skills**. Area C has only a page skeleton in place, and its content is under preparation.
+!!! warning "This is a mock version (Areas A, B, and C are functional)"
+    The site currently published is a mock version for reviewing the site structure. You can complete the learning activities and issue a certificate for **all three areas -- A, B, and C** (only Unit A-2, "Image Generation," is still under preparation).
 
 ## If your supervisor or instructor sent you this link
 
@@ -21,7 +21,7 @@ For detailed steps, see [How to Use](how-to-use.md).
 
 - **Area A: How Generative AI Works** — Learn how large language models and image generation work, and why hallucinations occur. ✅ Available in the mock version. [Go to Area A →](units/a1.md)
 - **Area B: Interactive AI Skills** — Learn iterative refinement, how to provide context, and techniques for having AI ask questions and critique your work. ✅ Available in the mock version. [Go to Area B →](units/b1.md)
-- **Area C: Ethics, Safety, and Verification** — Learn about protecting patient information, copyright, bias, and human verification. 🚧 Under preparation. [Go to Area C →](units/c1.md)
+- **Area C: Ethics, Safety, and Verification** — Learn about protecting patient information, copyright, bias, and human verification. ✅ Available in the mock version. [Go to Area C →](units/c1.md)
 
 ## Our promises
 

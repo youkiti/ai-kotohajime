@@ -1,0 +1,39 @@
+{
+  "title": "Unit C-1 Self-Check (3 questions, for confirming understanding -- no pass/fail record is saved)",
+  "passRatio": 0.8,
+  "questions": [
+    {
+      "q": "What is the content of the \"3-second check\" to perform before entering text into a generative AI?",
+      "choices": [
+        "Check for typos, whether the language is properly polite, and whether the text is too long",
+        "Check whether the text contains information that could directly identify an individual, whether it contains information that could identify someone through a combination of details, and whether real data actually needs to be entered at all",
+        "Check the AI's usage fee, response speed, and server congestion",
+        "Check whether the time of entry is late at night and whether you are using a network outside the hospital"
+      ],
+      "answer": 1,
+      "explanation": "The 3-second check before entering text covers three points: (1) whether it contains information that could directly identify an individual, such as name, ID, date, or facility name; (2) whether it contains information that could identify someone through a combination of details, such as a rare disease, age, and region; and (3) whether real data actually needs to be entered at all -- whether a fictionalized or abstracted description would serve the purpose instead. The formatting of the text (option 1), the fee or speed (option 3), and the time of day or network (option 4) are unrelated to protecting patient information."
+    },
+    {
+      "q": "A colleague says, \"I changed the patient's name to initials, so it should be fine to enter this into a generative AI.\" What is the most appropriate response to this statement?",
+      "choices": [
+        "Using initials removes it from being personal information, so there is no need to point anything out",
+        "Replacing the name with a numeric ID instead of initials would solve the problem",
+        "Even with initials, the individual could still be identified through a combination of a rare disease, age, region, or occupation, so initials alone are not sufficient",
+        "The problem is not the name but the diagnosis, so only the diagnosis needs to be removed"
+      ],
+      "answer": 2,
+      "explanation": "Replacing the name with initials alone is not sufficient anonymization. A combination of a rare disease name, age, region, occupation, admission date, and so on can still identify the individual even without a name (re-identification through combination). Replacing it with a numeric ID (option 2) likewise does not resolve the problem of combination with other information. Removing only the diagnosis (option 4) is also not a fundamental solution, since the remaining information could still allow identification depending on the combination."
+    },
+    {
+      "q": "Which of the following best describes what to do if you accidentally send text containing patient information to a general-purpose, consumer-facing generative AI?",
+      "choices": [
+        "Deleting the chat history immediately after sending makes it as if the message was never sent",
+        "Content that has already been sent has already reached the provider's server and cannot be fully retracted by the user, which is why checking before sending is so important; if you do send it by mistake, promptly report and consult according to your organization's rules, without concealing it",
+        "As long as the AI has not yet replied, the send has not actually gone through, so there is no problem",
+        "Content sent on a free plan is not stored, by policy, so nothing further needs to be done"
+      ],
+      "answer": 1,
+      "explanation": "Once content is sent, it has already reached the provider's server at that moment, and no action by the user -- such as deleting chat history -- can retract the send itself (options 1 and 3 are incorrect). On a free plan, the input may actually be more likely to be used for training or similar purposes (option 4 is incorrect). This is precisely why checking before sending is the most important safeguard, and if a mistaken send does occur, the appropriate response is to promptly report and consult according to your organization's rules on handling personal information, rather than concealing it."
+    }
+  ]
+}

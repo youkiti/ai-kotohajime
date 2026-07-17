@@ -1,10 +1,21 @@
-# Area C Quiz & Certificate
+# Area C Quiz and Certificate
 
-!!! warning "Under preparation (mock)"
-    The Area C quiz is under preparation. It is planned to follow the same specification as the [Area A quiz](a.md) (10 questions total, four choices each, batch scoring, pass with 80% or higher, unlimited retries).
+## Rules
 
-## Issuing the Certificate
+- 10 questions total, in multiple-choice format (4 options each).
+- All questions are graded together after you answer them (batch grading).
+- A score of 8 or more correct (80%) is a pass.
+- An explanation is shown for any question you get wrong.
+- You can retake the quiz as many times as you like. There is no limit on attempts.
+- You can take the quiz even without having read [Unit C-1](../units/c1.md) or [Unit C-2](../units/c2.md). The only requirement for passing is answering correctly on the quiz.
+- Your pass record is stored only inside this device's browser (localStorage). It is never sent to a server.
 
-<div data-cert-area="c" data-cert-locked="The Area C quiz is under preparation. Once it is available, passing with a score of 80% or higher will unlock this certificate."></div>
+<div data-quiz-src="../../assets/data/quiz-c.json" data-quiz-gate="c"></div>
 
-You can check your progress across all areas on the [certificate page](../mokuroku.md) as well.
+## Issuing the certificate
+
+Once you pass the quiz, you can issue your certificate below.
+
+<div data-cert-area="c" data-cert-locked="Issued after you pass the Area C quiz."></div>
+
+You can also check your progress across all areas on the [Certificate page](../mokuroku.md).

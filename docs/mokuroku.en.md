@@ -20,9 +20,9 @@ Issued once you have both passed the [Area B quiz](quiz/b.md) and submitted the 
 
 ## Area C Certificate
 
-The [Area C quiz](quiz/c.md) is under preparation.
+Issued after you pass the [Area C quiz](quiz/c.md).
 
-<div data-cert-area="c" data-cert-locked="The Area C quiz is under preparation. Once it is available, passing with a score of 80% or higher will unlock this certificate."></div>
+<div data-cert-area="c" data-cert-locked="Issued after you pass the Area C quiz."></div>
 
 ## Beginner Certificate
 
