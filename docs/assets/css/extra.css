@@ -313,3 +313,79 @@
 .aik-status-unpassed {
   color: var(--md-default-fg-color--light, inherit);
 }
+
+/* ====================================================================
+   slate(ダーク)配色の上書き (#11)
+   ----------------------------------------------------------------------
+   mkdocs.yml の theme.palette に prefers-color-scheme 連動の
+   light/dark 2エントリを設定すると、Material は選択中のスキームに応じて
+   <body data-md-color-scheme="default|slate"> を切り替える。
+   上のセクションで定義した緑/赤/アンバー/オレンジ系のハードコード色は
+   ライト配色向けの値のため、slate 選択時のみ [data-md-color-scheme="slate"]
+   セレクタで明るめの色に差し替える(既存ルールの書き換えは行わない)。
+
+   コントラスト比は slate 既定背景 ~#2e303e (相対輝度 ≈0.030) に対する概算値。
+   通常テキストは WCAG AA 4.5:1 以上、枠線等の非テキストは 3:1 以上を目安にした。
+   ==================================================================== */
+
+/* 緑(合格・正解・提出済み) 元 #2e7d32 → #66bb6a (推定コントラスト比 約5.5:1) */
+[data-md-color-scheme="slate"] .aik-quiz-passed-note {
+  border-color: #66bb6a;
+  background: rgba(102, 187, 106, 0.14);
+}
+
+[data-md-color-scheme="slate"] .aik-quiz-question--correct {
+  border-color: #66bb6a;
+  background: rgba(102, 187, 106, 0.12);
+}
+
+[data-md-color-scheme="slate"] .aik-quiz-result-message--pass {
+  color: #66bb6a;
+}
+
+[data-md-color-scheme="slate"] .aik-exercise-submitted {
+  border-color: #66bb6a;
+  background: rgba(102, 187, 106, 0.14);
+}
+
+[data-md-color-scheme="slate"] .aik-status-passed {
+  color: #66bb6a;
+}
+
+/* 赤(不正解・警告・エラー) 元 #b7282e → #ff6b6b (推定コントラスト比 約4.7:1) */
+[data-md-color-scheme="slate"] .aik-quiz-error {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.14);
+}
+
+[data-md-color-scheme="slate"] .aik-quiz-question--incorrect {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.12);
+}
+
+[data-md-color-scheme="slate"] .aik-quiz-warning,
+[data-md-color-scheme="slate"] .aik-quiz-incorrect-list a,
+[data-md-color-scheme="slate"] .aik-quiz-result-message--fail,
+[data-md-color-scheme="slate"] .aik-cert-error,
+[data-md-color-scheme="slate"] .aik-exercise-error {
+  color: #ff6b6b;
+}
+
+/* アンバー(未回答ハイライト) 元 #f9a825 → #ffca28 (推定コントラスト比 約8.5:1、
+   枠線用途で3:1要件は元の値でも満たすが、暗背景での視認性向上のため明度を上げる) */
+[data-md-color-scheme="slate"] .aik-quiz-question--unanswered {
+  border-color: #ffca28;
+  background: rgba(255, 202, 40, 0.16);
+}
+
+/* オレンジ(一部達成) 元 #b26a00 → #ffb74d (推定コントラスト比 約7.5:1。
+   元の値は暗背景で約3.1:1しかなく通常テキストのAA基準を満たさないため必須の変更) */
+[data-md-color-scheme="slate"] .aik-status-partial {
+  color: #ffb74d;
+}
+
+/* 目録プレビューの縁取り: 暗背景では黒の box-shadow がほぼ見えないため、
+   影を強めて白系の目録画像との境界を保つ。 */
+[data-md-color-scheme="slate"] .aik-cert-preview {
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+}

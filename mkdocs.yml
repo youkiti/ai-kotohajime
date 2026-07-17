@@ -17,9 +17,15 @@ theme:
   custom_dir: overrides  # 404.html のテーマオーバーライド用(overrides/404.html)
   language: ja
   palette:
-    scheme: default
-    primary: teal
-    accent: deep orange
+    # 手動トグルは付けず、OS/ブラウザの prefers-color-scheme に自動連動させる(#11)。
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: deep orange
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: deep orange
   font: false
   features:
     - navigation.tabs
