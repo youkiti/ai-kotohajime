@@ -5,6 +5,13 @@ repo_url: https://github.com/youkiti/ai-kotohajime
 repo_name: youkiti/ai-kotohajime
 edit_uri: ""
 
+# --strict 時にどのリンク種別をエラー化するか(MkDocs 1.6 の正式設定)。
+# サイト内アンカー(#fragment)不一致は既定では警告に上がらない(info)ため、
+# 明示的に warn 化して --strict でビルドを落とせるようにする(CI でのリンク切れ検出用)。
+validation:
+  links:
+    anchors: warn
+
 theme:
   name: material
   language: ja

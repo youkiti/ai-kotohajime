@@ -1,6 +1,9 @@
 # MkDocs ビルド生成物
 site/
 
+# CI(ci.yml)でデプロイ時サブパスを再現してビルドする際の出力先
+link-root/
+
 # Python 仮想環境
 .venv/
 
