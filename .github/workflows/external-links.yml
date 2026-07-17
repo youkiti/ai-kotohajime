@@ -1,0 +1,53 @@
+name: External Links
+
+# 週次で外部リンクの死活を確認する(ソースMarkdownの https リンクのみが対象)。
+# ビルド後HTMLではなく docs/**/*.md を直接見る理由: 生成HTMLにはテーマ由来の
+# リンク(CDN不使用のためほぼ無いが、将来追加され得るナビゲーション等)が
+# 混入しうるため、著者が実際に書いた外部リンクだけに絞って検査したい。
+# PRの必須チェック(ci.yml)とは完全に分離しており、このワークフローの失敗は
+# マージをブロックしない(リポジトリオーナーへの通知のみ)。
+on:
+  schedule:
+    - cron: "0 18 * * 1" # 毎週月曜 18:00 UTC(日本時間 火曜3:00)
+  workflow_dispatch: # 手動実行用
+
+permissions:
+  contents: read
+
+jobs:
+  external-link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # lycheeverse/lychee-action はコミットSHAでピン留め(v2.9.0, 2026-07-09公開)。
+      # フラグの実在は lychee v0.24.2(本actionの既定バージョン)のソース
+      # (lychee-bin/src/config/mod.rs)およびlychee公式ドキュメントで確認済み。
+      #
+      # 各フラグの意図:
+      #   --scheme https        https の外部リンクのみを検査対象にする(相対リンク・mailto等は除外)
+      #   --timeout             1リクエストのタイムアウト秒数(既定20秒。明示して意図を残す)
+      #   --max-retries         失敗時の再試行回数
+      #   --retry-wait-time     再試行までの待機秒数(既定より長くし、外部サーバへの負荷を抑える)
+      #   --max-concurrency     同時ネットワークリクエスト数の上限を既定(128)より大きく下げ、
+      #                         レート制限による誤検知やサーバへの負荷を避ける
+      #   --accept              lycheeの既定許容範囲(100..=103,200..=299)に加えて
+      #                         403(Forbidden)・429(Too Many Requests)を許容する。
+      #                         --accept はCLI指定時に既定値を完全に置き換える仕様のため、
+      #                         既定範囲も明示的に含めている。Google Drive・Vimeo等は
+      #                         ボット判定で正当なリンクにも403/429を返すことがあるための対策
+      #   --no-progress         CIログにプログレスバーの制御文字を出さない
+      - name: Check external links (lychee)
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          fail: true
+          failIfEmpty: true
+          args: >-
+            --scheme https
+            --timeout 20
+            --max-retries 3
+            --retry-wait-time 5
+            --max-concurrency 5
+            --accept 100..=103,200..=299,403,429
+            --no-progress
+            'docs/**/*.md'

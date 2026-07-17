@@ -1,0 +1,68 @@
+name: CI
+
+# PRごとの必須チェック。--strict ビルドが通ること、デプロイ時と同じサブパスで生成した
+# HTMLにリンク切れ・アンカー切れがないこと、data-quiz-src の参照先が(日英とも)実在し
+# JSONとして読めることを検査する。deploy.yml(push時の実デプロイ)とは完全に独立。
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # 必須。git-revision-date-localized プラグインは既定で strict モードであり、
+          # shallow clone だと各ページの最終更新日時をgit履歴から取得できず
+          # 「has no git logs」警告→ --strict ビルドが失敗するため(deploy.yml と同じ理由)
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # デプロイ時のサブパス /ai-kotohajime/ を再現してビルドする。Material が生成する
+      # ルート相対リンク(例: /ai-kotohajime/assets/js/quiz.js)を、lychee が
+      # ファイルシステム上で正しく解決できるようにするため(後段の --root-dir と対)。
+      - run: mkdocs build --strict --site-dir link-root/ai-kotohajime
+
+      # lycheeverse/lychee-action はコミットSHAでピン留め(v2.9.0, 2026-07-09公開)。
+      # フラグの実在は lychee v0.24.2(本actionの既定バージョン)のソース
+      # (lychee-bin/src/config/mod.rs)およびlychee公式ドキュメントで確認済み。
+      #
+      # 各フラグの意図:
+      #   --offline             外部通信ゼロ(HTTPリンクは検査せず、ローカルファイルのみ検査)
+      #   --root-dir            ルート相対リンク(/ai-kotohajime/...)をこのディレクトリ基準で
+      #                         解決する。site-dir を link-root/ai-kotohajime にビルドしたので、
+      #                         その1階層上(link-root)を渡すと実ファイルパスと一致する
+      #   --index-files         ディレクトリURL(例: units/a1/)を index.html の実在確認込みで
+      #                         検証する(未指定だとディレクトリが存在するだけで合格してしまう)
+      #   --include-fragments   #アンカー(見出しID)の実在も検査する
+      #   --no-ignore           link-root/ は .gitignore 対象だが、lychee には無視させず走査させる
+      #   --no-progress         CIログにプログレスバーの制御文字を出さない
+      - name: Check links (lychee)
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          fail: true # 壊れたリンクがあればジョブを失敗させる(既定値だが明示)
+          failIfEmpty: true # 検査対象0件の偽グリーンを防ぐ(既定値だが明示)
+          args: >-
+            --offline
+            --root-dir ${{ github.workspace }}/link-root
+            --index-files index.html
+            --include-fragments
+            --no-ignore
+            --no-progress
+            'link-root/ai-kotohajime/**/*.html'
+
+      - run: python scripts/check_quiz_src.py link-root/ai-kotohajime
