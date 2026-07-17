@@ -2,7 +2,7 @@
  * AI事始(AIことはじめ) - exercise.js
  *
  * `[data-exercise-gate]` を持つ要素に、実践課題(AIの講評テキスト)の
- * 提出UIを描画する。要件定義書v0.8 §4.6。
+ * 提出UIを描画する。要件定義書 §4.6。
  *
  * ページ側の契約:
  *   <div data-exercise-gate="b"

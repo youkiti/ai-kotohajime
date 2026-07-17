@@ -30,7 +30,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR_PARTS = ("docs", "assets", "data")
 QUIZ_FILENAME_RE = re.compile(r"^quiz-.*\.json$")
 
-GUIDELINE_PATH = REPO_ROOT / "documents" / "AI事始-作問ガイドライン-v0.1.md"
+GUIDELINE_PATH = REPO_ROOT / "documents" / "AI事始-作問ガイドライン.md"
 HOOK_INJECT_START = "<!-- hook-inject:start -->"
 HOOK_INJECT_END = "<!-- hook-inject:end -->"
 

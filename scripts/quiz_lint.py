@@ -3,7 +3,7 @@
 """
 quiz_lint.py — クイズJSON(docs/assets/data/quiz-*.json)の testwiseness cue 検査ツール。
 
-正本は documents/AI事始-作問ガイドライン-v0.1.md の「§3 機械チェックの閾値」であり、
+正本は documents/AI事始-作問ガイドライン.md の「§3 機械チェックの閾値」であり、
 本スクリプトはその実装。閾値を変更する場合は、ガイドライン文書と本スクリプトの両方を
 同時に改訂すること。
 
