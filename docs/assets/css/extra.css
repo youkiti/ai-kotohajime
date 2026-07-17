@@ -102,6 +102,13 @@
   cursor: pointer;
 }
 
+.aik-quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  margin-top: 0.5em;
+}
+
 .aik-quiz-warning {
   color: #b7282e;
   font-weight: 600;

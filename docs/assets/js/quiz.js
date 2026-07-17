@@ -32,6 +32,7 @@
       },
       listSep: "、",
       submitBtn: "採点する",
+      clearBtn: "選択をクリア",
       unansweredWarningPrefix: "⚠ 未回答の問題があります: ",
       incorrectListPrefix: "不正解: ",
       correct: "✅ 正解",
@@ -74,6 +75,7 @@
       },
       listSep: ", ",
       submitBtn: "Check answers",
+      clearBtn: "Clear selections",
       unansweredWarningPrefix: "⚠ Some questions are unanswered: ",
       incorrectListPrefix: "Incorrect: ",
       correct: "✅ Correct",
@@ -255,11 +257,22 @@
     warning.setAttribute("hidden", "hidden");
     form.appendChild(warning);
 
+    var actions = el("div", { className: "aik-quiz-actions" });
+
     var submitBtn = document.createElement("button");
     submitBtn.type = "button";
     submitBtn.className = "md-button md-button--primary";
     submitBtn.textContent = T.submitBtn;
-    form.appendChild(submitBtn);
+    actions.appendChild(submitBtn);
+
+    // 「選択をクリア」は非primaryの控えめなmd-buttonにして、採点ボタンより目立たせない。
+    var clearBtn = document.createElement("button");
+    clearBtn.type = "button";
+    clearBtn.className = "md-button";
+    clearBtn.textContent = T.clearBtn;
+    actions.appendChild(clearBtn);
+
+    form.appendChild(actions);
 
     var summary = el("div", { className: "aik-quiz-summary" });
     summary.setAttribute("hidden", "hidden");
@@ -267,6 +280,10 @@
 
     submitBtn.addEventListener("click", function () {
       gradeQuiz(instanceId, entries, form, warning, summary, passRatio, gate);
+    });
+
+    clearBtn.addEventListener("click", function () {
+      resetQuiz(entries, warning, summary);
     });
 
     container.appendChild(form);
@@ -382,6 +399,32 @@
       }
       summary.appendChild(resultP);
     }
+  }
+
+  // 「選択をクリア」ボタンの処理。回答・判定・警告・採点サマリーをすべて取り除き、
+  // ページを開き直した直後と同じ見た目に戻す。合格記録(localStorage)や
+  // 合格済み注記(aik-quiz-passed-note、form要素の外側にある)は回答状態ではないため対象外。
+  function resetQuiz(entries, warning, summary) {
+    for (var i = 0; i < entries.length; i++) {
+      var entry = entries[i];
+
+      var radios = entry.fieldset.querySelectorAll('input[type="radio"]');
+      for (var r = 0; r < radios.length; r++) {
+        radios[r].checked = false;
+      }
+
+      entry.feedback.innerHTML = "";
+      entry.feedback.setAttribute("hidden", "hidden");
+
+      // 正誤・未回答ハイライトをまとめてクラス指定し直すことで初期状態に戻す。
+      entry.fieldset.className = "aik-quiz-question";
+    }
+
+    warning.textContent = "";
+    warning.setAttribute("hidden", "hidden");
+
+    summary.innerHTML = "";
+    summary.setAttribute("hidden", "hidden");
   }
 
   function loadQuiz(container) {
