@@ -3,7 +3,7 @@
 **A self-study site on generative AI for healthcare professionals**
 
 !!! warning "This is a mock version (Areas A, B, and C are functional)"
-    The site currently published is a mock version for reviewing the site structure. You can complete the learning activities and issue a certificate for **all three areas -- A, B, and C** (only Unit A-2, "Image Generation," is still under preparation).
+    The site currently published is a mock version for reviewing the site structure. You can complete the learning activities and issue a certificate for **all three areas -- A, B, and C**.
 
 ## If your supervisor or instructor sent you this link
 

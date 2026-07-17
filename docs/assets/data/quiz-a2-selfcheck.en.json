@@ -1,0 +1,39 @@
+{
+  "title": "Unit A-2 Self-Check (3 questions, for confirming understanding -- no pass/fail record is saved)",
+  "passRatio": 0.8,
+  "questions": [
+    {
+      "q": "A physician preparing lecture slides thought, \"Image-generation AI works by exactly the same mechanism as text-generation AI, deciding pixels the way it predicts the next word.\" Which of the following is the most appropriate response to this thought?",
+      "choices": [
+        "That thought is correct: image-generation AI produces pixels one at a time, using the exact same next-word-prediction mechanism that text-generation AI relies on",
+        "Image-generation AI starts from an image containing noise and gradually removes that noise to restore it, a different principle from next-word prediction",
+        "Image-generation AI converts learned images into a database and simply searches for and combines the ones closest to the instructions",
+        "Image-generation AI actually just returns an image a human illustrator secretly drew behind the scenes; the AI itself is not the one generating the pixels"
+      ],
+      "answer": 1,
+      "explanation": "Image-generation AI (a diffusion model) works by starting from an image containing random noise and progressively removing that noise, restoring an image that approximates the given instructions. This is a different principle from text-generation AI (an LLM), which probabilistically predicts the next word based on the preceding context. The claim that it uses the exact same next-word-prediction mechanism (option 1), the claim that it merely converts existing images into a database and searches/combines them (option 3), and the claim that a human illustrator is secretly drawing the image behind the scenes (option 4) are all inconsistent with how the mechanism actually works."
+    },
+    {
+      "q": "A physician who teaches medical education had an image-generation AI create a cross-sectional diagram of the heart. The resulting image looked polished, but on closer inspection, the positions of the atria and ventricles did not match reality. Which of the following, based on how diffusion models work, best explains this phenomenon?",
+      "choices": [
+        "Image-generation AI checks against a medical textbook database each time it runs, so this kind of positional error cannot occur given how the mechanism works",
+        "This error occurs because developers deliberately built errors into images for performance-testing purposes",
+        "A diffusion model is not a mechanism that verifies medical accuracy; it merely restores a plausible-looking image close to the instructions, so anatomical errors can occur",
+        "This kind of error is a bug limited to early image-generation models and rarely occurs in current models"
+      ],
+      "answer": 2,
+      "explanation": "A diffusion model is not a mechanism that verifies medical accuracy as it builds an image; it merely removes noise to restore a plausible-looking image close to the instructions. As a result, even a polished-looking diagram can contain anatomical errors, such as organs being positioned incorrectly (the same idea as hallucination in text). The claim that it cross-references a medical textbook database each time, making this error impossible (option 1), the claim that developers deliberately built in the error (option 2), and the claim that this is a bug limited to early models (option 4) are all inconsistent with how the mechanism works."
+    },
+    {
+      "q": "A pharmacist is considering how to use generative AI while preparing slides for a conference presentation. Which of the following is the most appropriate use?",
+      "choices": [
+        "Have the AI draft a slide outline and rough graphs, then personally verify the accuracy of the figures and data against the original source data",
+        "Enter patient medication-guidance records as-is and have the AI automatically generate graphs for the presentation without checking the content",
+        "Adopt the data and charts the AI produced directly in the presentation material without any checking, on the grounds that the content is too specialized to question",
+        "Give up on using generative AI for charts or slide layout, based on the mistaken belief that it is capable of generating text and nothing more"
+      ],
+      "answer": 0,
+      "explanation": "Some generative AI can produce formats besides text, such as a slide outline or a rough graph. That said, you still need to personally verify the accuracy of the figures and data against the original source data. Entering personal information such as patient medication-guidance records as-is without checking the content (option 2), skipping verification because the content is specialized (option 3), and giving up on using generative AI based on the mistaken belief that it can only produce text (option 4) are all inappropriate."
+    }
+  ]
+}
