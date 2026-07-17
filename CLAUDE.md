@@ -48,6 +48,7 @@ Material for MkDocs + 素のJS(ビルド工程なし・外部ライブラリ/CDN
 - 読み込み順は mkdocs.yml の extra_javascript で lang-redirect.js → storage.js → quiz.js → exercise.js → certificate.js(依存順。変えない。lang-redirect.js は AIK 非依存のため先頭)。末尾の external-links.js(外部リンクに target="_blank" + rel="noopener" を一律付与)は window.AIK に依存しない独立JSのため読み込み順に制約はない
 - theme features に `navigation.instant` を追加しないこと(全JSがフルページロード前提の初期化のため、SPA的ページ遷移では描画されなくなる)
 - 日本語ページ(md/json)を更新したら、隣の `.en.md` / `.en.json` も更新すること(保守原則3参照)
+- 404ページは `overrides/404.html`(Material テーマオーバーライド。`mkdocs.yml` の `theme.custom_dir: overrides`)で提供する。`docs/404.md` のような通常ページ方式では機能しない(MkDocs 本体にも mkdocs-static-i18n にも 404.md の特別扱いはなく、テーマの静的テンプレート `404.html` が常に優先される上、GitHub Pages はルートの `404.html` しか配信しないため)。本文リンクはルート相対 `/ai-kotohajime/...` 基準で書くこと(`site_url` のサブパスが変わったら要修正)
 
 ## 設計原則(全実装を拘束する制約)
 
