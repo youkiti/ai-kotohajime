@@ -43,6 +43,15 @@
   border-radius: 6px;
   padding: 0.8em 1em 1em;
   margin: 0 0 1.2em;
+  /* 未回答警告・不正解一覧のアンカーリンクでジャンプした際、Materialの固定ヘッダーに
+     設問先頭が隠れないようにする。 */
+  scroll-margin-top: 4rem;
+}
+
+/* アンカー遷移でスクリプトからフォーカスされた際の枠線は出さない(tabindex="-1"はTabキー操作の
+   順序には含めず、リンクからのジャンプ先を示すためだけに使う)。 */
+.aik-quiz-question:focus {
+  outline: none;
 }
 
 .aik-quiz-question legend {
@@ -59,6 +68,13 @@
 .aik-quiz-question--incorrect {
   border-color: #b7282e;
   background: rgba(183, 40, 46, 0.07);
+}
+
+/* 採点時に未回答だった設問のハイライト(正誤とは別の警告色にして混同を避ける)。
+   回答すると即座に外れる(change時)ほか、再採点のたびに一旦全除去してから付け直す。 */
+.aik-quiz-question--unanswered {
+  border-color: #f9a825;
+  background: rgba(249, 168, 37, 0.12);
 }
 
 .aik-quiz-choices {
@@ -91,6 +107,15 @@
   font-weight: 600;
 }
 
+.aik-quiz-warning a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.aik-quiz-warning a:hover {
+  text-decoration: none;
+}
+
 .aik-quiz-feedback {
   margin-top: 0.75em;
   padding-top: 0.55em;
@@ -119,6 +144,21 @@
   font-weight: 600;
   margin: 0 0 0.35em;
   color: var(--md-default-fg-color, inherit);
+}
+
+.aik-quiz-incorrect-list {
+  margin: 0 0 0.35em;
+  color: var(--md-default-fg-color, inherit);
+}
+
+.aik-quiz-incorrect-list a {
+  color: #b7282e;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.aik-quiz-incorrect-list a:hover {
+  text-decoration: none;
 }
 
 .aik-quiz-result-message {
