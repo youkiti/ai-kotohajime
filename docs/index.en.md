@@ -32,4 +32,4 @@ For detailed steps, see [How to Use](how-to-use.md).
 
 ---
 
-This site is developed as open source. To view the source code or report an issue or request, please visit the [GitHub repository (youkiti/ai-kotohajime)](https://github.com/youkiti/ai-kotohajime).
+This site is developed as open source. To view the source code, please visit the [GitHub repository (youkiti/ai-kotohajime)](https://github.com/youkiti/ai-kotohajime). For how to report an error or request an improvement, see [About This Site](about.md#report-issues).
