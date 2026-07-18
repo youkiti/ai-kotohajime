@@ -3,15 +3,15 @@
   "passRatio": 0.8,
   "questions": [
     {
-      "q": "A physician preparing lecture slides thought, \"Image-generation AI works by exactly the same mechanism as text-generation AI, deciding pixels the way it predicts the next word.\" Which of the following is the most appropriate response to this thought?",
+      "q": "A physician preparing lecture slides thought, \"Diffusion models, the technology widely used in image-generation AI, work by exactly the same mechanism as text-generation AI, deciding pixels the way it predicts the next word.\" Which of the following is the most appropriate response to this thought?",
       "choices": [
-        "That thought is correct: image-generation AI produces pixels one at a time, using the exact same next-word-prediction mechanism that text-generation AI relies on",
-        "Image-generation AI starts from an image containing noise and gradually removes that noise to restore it, a different principle from next-word prediction",
-        "Image-generation AI converts learned images into a database and simply searches for and combines the ones closest to the instructions",
-        "Image-generation AI completes a picture the way a person draws one, adding lines one at a time starting from the outline of each element"
+        "That thought is correct: a diffusion model produces pixels one at a time, using the exact same next-word-prediction mechanism that text-generation AI relies on",
+        "A diffusion model starts from an image containing noise and gradually removes that noise to restore it, a different principle from next-word prediction",
+        "A diffusion model converts learned images into a database and simply searches for and combines the ones closest to the instructions",
+        "A diffusion model completes a picture the way a person draws one, adding lines one at a time starting from the outline of each element"
       ],
       "answer": 1,
-      "explanation": "Image-generation AI (a diffusion model) works by starting from an image containing random noise and progressively removing that noise, restoring an image that approximates the given instructions. This is a different principle from text-generation AI (an LLM), which probabilistically predicts the next word based on the preceding context. The claim that it uses the exact same next-word-prediction mechanism (option 1), the claim that it merely converts existing images into a database and searches/combines them (option 3), and the claim that it draws lines one at a time from the outline the way a person does (option 4) are all inconsistent with how the mechanism actually works."
+      "explanation": "A diffusion model works by starting from an image containing random noise and progressively removing that noise, restoring an image that approximates the given instructions. This is a different principle from text-generation AI (an LLM), which probabilistically predicts the next word based on the preceding context. (Some newer image-generation AI does produce images with the same 'predict what comes next' approach as an LLM, but that is a different technology from diffusion models.) The claim that it uses the exact same next-word-prediction mechanism (option 1), the claim that it merely converts existing images into a database and searches/combines them (option 3), and the claim that it draws lines one at a time from the outline the way a person does (option 4) are all inconsistent with how diffusion models actually work."
     },
     {
       "q": "A physician who teaches medical education had an image-generation AI create a cross-sectional diagram of the heart. The resulting image looked polished, but on closer inspection, the positions of the atria and ventricles did not match reality. Which of the following, based on how diffusion models work, best explains this phenomenon?",

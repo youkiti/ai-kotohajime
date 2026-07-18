@@ -3,26 +3,26 @@
   "passRatio": 0.8,
   "questions": [
     {
-      "q": "A resident is about to enter the following text into a generative AI: \"78-year-old female, Ms. Hanako Yamada (Patient ID: 0012345). Admitted to XX City Hospital on June 2 for pneumonia. Please draft a discharge summary.\" What is the most significant problem with this input?",
+      "q": "A resident is about to enter the following text into a general-purpose, consumer-facing generative AI service: \"78-year-old female, Ms. Hanako Yamada (Patient ID: 0012345). Admitted to XX City Hospital on June 2 for pneumonia. Please draft a discharge summary.\" What is the most significant problem with this input?",
       "choices": [
         "That the passage is too long and complex for the AI to produce a summary",
         "That it contains information identifying the patient, such as name, patient ID, admission date, and facility",
         "That using AI to draft a discharge summary is itself banned outright by law",
-        "That the honorific attached to the name will make the AI mistake the person for someone real"
+        "That the real problem is naming the diagnosis (pneumonia), and hiding it would make the rest fine to enter as-is"
       ],
       "answer": 1,
-      "explanation": "This input contains information that directly identifies an individual -- name, patient ID, admission date, and facility name. Because anything entered into a generative AI is sent to the provider's server, this text must not be sent as written. The length of the passage is not the issue (option 1), and using AI to draft a summary is not itself banned by law (option 3). Whether an honorific is attached is not the essential problem (option 4). Once the personal information has been removed or abstracted, requesting a draft remains entirely possible."
+      "explanation": "This input contains information that directly identifies an individual -- name, patient ID, admission date, and facility name. Because anything entered into a general-purpose consumer AI service is sent to the provider's server, this text must not be sent as written. The length of the passage is not the issue (option 1), and using AI to draft a summary is not itself banned by law (option 3). The core problem is not the diagnosis itself but the presence of identifying information -- hiding the diagnosis while the name and patient ID remain does not make the text safe to enter (option 4). Once the personal information has been removed or abstracted, requesting a draft remains entirely possible."
     },
     {
       "q": "Which of the following best explains why patient information must not be entered into a general-purpose, consumer-facing generative AI service?",
       "choices": [
-        "Because the AI might use the input to reach out to the patient directly without staff involvement",
-        "Because entering the information might cause the hospital's electronic medical record system to shut down by mistake",
+        "Because the connection is not encrypted, so the content could be intercepted by a third party while in transit",
+        "Because the terms of service categorically prohibit healthcare professionals from entering anything related to their work",
         "Because the input reaches the provider's server, may be used for training or quality checks, and cannot be retracted",
-        "Because when many users access the service at once, the AI's response speed can temporarily slow down noticeably"
+        "Because the service automatically detects any text containing personal information and refuses to answer it"
       ],
       "answer": 2,
-      "explanation": "Anything entered into a generative AI is sent over the internet to the provider's server. With general-purpose consumer services, the input may be used for training the model or for quality checks, and there is no way for the user to retract content once it has been sent. This is a serious problem from the standpoint of a healthcare professional's duty of confidentiality and the protection of personal information. The AI reaching out to the patient directly (option 1), the electronic medical record system shutting down (option 2), and a noticeable slowdown in response speed (option 4) are reasons unrelated to protecting what was sent."
+      "explanation": "Anything entered into a generative AI is sent over the internet to the provider's server. With general-purpose consumer services, the input may be used for training the model or for quality checks, and there is no way for the user to retract content once it has been sent. This is a serious problem from the standpoint of a healthcare professional's duty of confidentiality and the protection of personal information. The connection itself is normally encrypted -- the core problem is how the data is handled at its destination, not interception in transit (option 1). The terms of service do not categorically prohibit work-related input (option 2), and no mechanism is guaranteed to detect personal information and refuse to answer -- in practice such input can be sent and processed without ever being flagged (option 4)."
     },
     {
       "q": "A medical student wants to use a generative AI to help organize a case they encountered, for use at a study session. What is the most appropriate approach?",
@@ -58,7 +58,7 @@
       "explanation": "A commercially published textbook is a copyrighted work, and printing and distributing a summary created by entering its content could constitute reproduction or adaptation, so obtaining the rights holder's permission may be necessary before distribution. Because the legal treatment can differ between using something solely for one's own study and reproducing/distributing it as a handout, this careful consideration matters specifically when the purpose is distribution. The idea that a textbook is \"shared property\" and free to use (option 1), that passing it through AI erases the original rights (option 2), and that a personal memo and a distributed handout are treated the same way (option 3) are all incorrect."
     },
     {
-      "q": "A generative AI answered, \"According to the 2023 guideline of the XX Society, this treatment is considered first-line.\" What is the most appropriate response?",
+      "q": "A generative AI answered, \"According to the 2025 guideline of the XX Society, this treatment is considered first-line.\" What is the most appropriate response?",
       "choices": [
         "Always check the guideline itself, confirming that it exists and that its content matches",
         "Because a specific society name and year are given, it can be judged an accurate, real citation",

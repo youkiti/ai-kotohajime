@@ -11,7 +11,7 @@
         "Reflect tendencies in the variety of writing styles it encountered during training"
       ],
       "answer": 2,
-      "explanation": "What generative AI actually does when producing text is construct text based on statistical patterns acquired during training (option 1), probabilistically predict the next word based on the immediately preceding context (option 2), and reflect tendencies in the variety of writing styles it encountered during training (option 4). It does not, however, always directly access an external website to fact-check every time it responds (with the exception of some tools that incorporate search functionality). Note that 'acquiring patterns' itself happens during the prior training phase, not at the moment the text is produced."
+      "explanation": "What generative AI actually does when producing text is construct text based on statistical patterns acquired during training (option 1), probabilistically predict the next word based on the immediately preceding context (option 2), and reflect tendencies in the variety of writing styles it encountered during training (option 4). It does not, however, always directly access an external website to fact-check every time it responds (web-search features are now widely used, but even then whether a search actually runs depends on the situation, and fact-checking on every response is not guaranteed). Note that 'acquiring patterns' itself happens during the prior training phase, not at the moment the text is produced."
     },
     {
       "q": "A medical student said, \"Generative AI is conscious and thinks for itself to choose its answers.\" Which of the following is the most appropriate response to this statement?",
