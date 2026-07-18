@@ -4,7 +4,7 @@
 
 本サイトは、学習者(研修医・学生等)が一人で学び、フィードバックを受け、修了証(目録)まで自己発行できるように設計されています。教員・指導医の皆さまにお願いすることは、学習者に下記のようなリンクを送ることだけです。
 
-現在モックとして実際に体験できるのは、領域A([Unit A-1](units/a1.md)・[領域Aクイズ](quiz/a.md))と領域B([Unit B-1](units/b1.md)・[Unit B-2](units/b2.md)・[領域Bクイズと実践課題](quiz/b.md))です。
+現在、全3領域(A・B・C)が体験できます。領域A([Unit A-1](units/a1.md)・[領域Aクイズ](quiz/a.md))、領域B([Unit B-1](units/b1.md)・[Unit B-2](units/b2.md)・[領域Bクイズと実践課題](quiz/b.md))、領域C([Unit C-1](units/c1.md)・[Unit C-2](units/c2.md)・[領域Cクイズ](quiz/c.md))です。
 
 ## 課題として案内するときの文例
 

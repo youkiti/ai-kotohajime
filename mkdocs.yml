@@ -1,6 +1,6 @@
 site_name: AI事始
 site_description: 医療者のための生成AI自習サイト
-site_url: https://youkiti.github.io/ai-kotohajime/  # モック公開先(運営名義の確定までの暫定。§9 TBD)
+site_url: https://youkiti.github.io/ai-kotohajime/  # 試験公開先(運営名義の確定までの暫定。§9 TBD)
 repo_url: https://github.com/youkiti/ai-kotohajime
 repo_name: youkiti/ai-kotohajime
 edit_uri: ""
@@ -50,7 +50,7 @@ plugins:
           build: true
           site_name: "AI Kotohajime"
           site_description: "A self-study site on generative AI for healthcare professionals"
-          copyright: "AI Kotohajime (mock version) — This site collects no user logs"
+          copyright: "AI Kotohajime (beta) — This site collects no user logs"
           nav_translations:
             ホーム: Home
             使い方: How to Use
@@ -112,4 +112,4 @@ nav:
       - disclaimer.md
       - privacy.md
 
-copyright: "AI事始(モック版) — 本サイトはユーザーログを一切収集しません"
+copyright: "AI事始(試験公開版) — 本サイトはユーザーログを一切収集しません"
