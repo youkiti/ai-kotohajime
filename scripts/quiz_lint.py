@@ -170,6 +170,24 @@ def check_l2(questions: list[dict]) -> list[str]:
     return []
 
 
+# --- L3. 選択肢長の最長/最短比(問題単位) ------------------------------------
+
+
+def check_l3(questions: list[dict]) -> list[str]:
+    messages: list[str] = []
+    for idx, q in enumerate(questions, start=1):
+        lengths = [len(c) for c in q["choices"]]
+        shortest = min(lengths)
+        if shortest == 0:
+            continue
+        ratio = max(lengths) / shortest
+        if ratio > 1.5:
+            messages.append(
+                f"[L3] 問{idx}: 選択肢の最長/最短比 {ratio:.2f} が1.5を超えています(最長{max(lengths)}文字/最短{shortest}文字)"
+            )
+    return messages
+
+
 # --- W. 断定語・婉曲表現の偏り(ファイル単位) --------------------------------
 
 
@@ -293,6 +311,7 @@ def lint_file(path: Path) -> list[str]:
 
     messages.extend(check_l1(valid_questions))
     messages.extend(check_l2(valid_questions))
+    messages.extend(check_l3(valid_questions))
     messages.extend(check_w(valid_questions, english))
     messages.extend(check_p(valid_questions))
 
