@@ -69,7 +69,7 @@ the rubric that corresponds to the stated task.
   the output more concrete?
 - Directing the AI effectively: Does the submitter make effective use of
   instructions that have the AI ask about missing information, or that request
-  candid, unflattering critique?
+  candid critique?
 --- End of rubric ---
 
 (If a task name other than the ones above is stated, use the general criteria of
