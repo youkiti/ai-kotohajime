@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 現在の状態
 
-**モック実装済み(A・B・C領域が日英とも実動)。** 全ページの骨格があり、A領域(Unit A-1 本文・領域Aクイズ10問・目録)、B領域(Unit B-1/B-2 本文・領域Bクイズ5問・実践課題の提出・目録)、C領域(Unit C-1/C-2 本文・領域Cクイズ10問・目録)が日本語版・英語版(`.en.md`/`.en.json`)の両方で動作する。Unit A-2 のみ日英ともプレースホルダ。
+**モック実装済み(A・B・C領域が日英とも実動)。** 全ページの骨格があり、A領域(Unit A-1/A-2 本文・領域Aクイズ10問・目録)、B領域(Unit B-1/B-2 本文・領域Bクイズ5問・実践課題の提出・目録)、C領域(Unit C-1/C-2 本文・領域Cクイズ10問・目録)が日本語版・英語版(`.en.md`/`.en.json`)の両方で動作する。全6ユニットに本文と自己チェッククイズがあり、プレースホルダは残っていない。
 
 正本ドキュメント(実装より優先。仕様変更はまずここに反映):
 - `documents/AI事始-要件定義書.md` — 要件・技術構成・MVP/モック定義・英語版(i18n)仕様
@@ -39,14 +39,16 @@ Material for MkDocs + 素のJS(ビルド工程なし・外部ライブラリ/CDN
 - `<div data-exercise-gate="b" data-exercise-marker="【AI事始 講評】" data-exercise-minlength="100">` — 実践課題の提出UI(exercise.js)。検証はマーカー(固定見出し)を含む+最低文字数のテキスト存在確認のみ。**貼付テキストは保存せず提出日時のみ記録**。マーカー文字列は exercise.js の既定値 / ページの `data-exercise-marker` / `docs/feedback.md` の採点プロンプトが出力させる見出しの3点で同期させること(変更時は3箇所とも直す)。英語版は `[AI Kotohajime Feedback]`(一字一句固定)で、exercise.js(既定値)/ `quiz/b.en.md` の `data-exercise-marker` / `feedback.en.md` の採点プロンプトの3点同期が対になる。英語版の最低文字数は `data-exercise-minlength="200"`(日本語版は100のまま)
 - `<div data-cert-area="a" data-cert-locked="...">` — 目録発行UI(certificate.js)。area は a/b/c/shokyu(初級目録=3領域修了で解錠)。未達時は locked 文言を表示
 - `<div data-mokuroku-status>` / `<button data-reset-progress>` — 取得状況一覧/記録消去(storage.js)
+- `<div data-area-progress>` — ユニットページ上部の軽量進捗表示(progress.js)。全ユニット12ファイル(日英)のメタ情報行直後に設置。**進捗が一つもない場合は何も描画しない**(初回訪問時の情報量を増やさない)。判定は `AIK` の公開APIのみを使用し、`aik:passed` で再描画。目録ページへのリンクは相対パス `../../mokuroku/`(ja/en どちらの directory URL でも正しく解決される)
 - 修了状態: `window.AIK`(storage.js)が管理。localStorage キーは `aikotohajime.quiz.<area>.passedAt` と `aikotohajime.exercise.<area>.submittedAt`(いずれもISO日時)。**`AIK.isPassed(area)` は「クイズ合格 AND(実践課題必須領域なら)課題提出」の領域修了判定**で、クイズ単体の合否は `AIK.passedAt(area)`。実践課題を要する領域は storage.js の `EXERCISE_AREAS`(現在 b のみ)で定義。クイズ合格・課題提出のたびに CustomEvent `aik:passed` が発火し、同一ページの取得状況・目録UIが再描画される。これらの進捗キーは**日本語版・英語版で共有**する(言語別に分けない)
 - クイズJSON: `docs/assets/data/quiz-*.json`。スキーマ `{title, passRatio, questions:[{q, choices[4], answer(正解index), explanation}]}`。問題数は A/C=10問・B=5問(合格ラインは `ceil(問題数×passRatio)` で自動計算)。C領域は `quiz-c.json` とページ側フックを足すだけで動く(JS変更不要)。作問は `documents/AI事始-作問ガイドライン.md` に従う。`python scripts/quiz_lint.py` で機械チェックでき、クイズJSON編集時は `scripts/quiz_hook.py`(Claude Code hook)が自動で lint 結果を注入する
 - 多言語化(i18n): **mkdocs-static-i18n** の suffix 方式。`.en.md` / `.en.json` を原文の隣に置くと英語版になる(例: `b1.md` に対して `b1.en.md`)。日本語サイトはルート、英語ページは `/en/` 配下に生成され、未翻訳ページは日本語版で補完される(fallback_to_default)
 - `.en.md` 内のサイト内リンクは**基底ファイル名**で書く(`b1.md` であって `b1.en.md` ではない。プラグインが言語別ビルド時に解決する)
 - 言語設定: localStorage キー `aikotohajime.lang`(値は `ja`/`en`)。`lang-redirect.js` が初回訪問時のみ `navigator.language` で自動判定・リダイレクトし、以後は自動リダイレクトしない。ヘッダーの言語セレクタで手動切替すると同キーが上書きされる。`AIK.reset()`(storage.js)ではこのキーは消えない
 - JS内のUI文字列は各ファイル内の `I18N = {ja, en}` テーブルで管理し、`document.documentElement.lang` で切替する
-- 読み込み順は mkdocs.yml の extra_javascript で lang-redirect.js → storage.js → quiz.js → exercise.js → certificate.js(依存順。変えない。lang-redirect.js は AIK 非依存のため先頭)。末尾の external-links.js(外部リンクに target="_blank" + rel="noopener" を一律付与)は window.AIK に依存しない独立JSのため読み込み順に制約はない
+- 読み込み順は mkdocs.yml の extra_javascript で lang-redirect.js → storage.js → quiz.js → exercise.js → certificate.js → progress.js(依存順。変えない。lang-redirect.js は AIK 非依存のため先頭、progress.js は AIK 依存のため storage.js より後)。末尾の external-links.js(外部リンクに target="_blank" + rel="noopener" を一律付与)は window.AIK に依存しない独立JSのため読み込み順に制約はない
 - theme features に `navigation.instant` を追加しないこと(全JSがフルページロード前提の初期化のため、SPA的ページ遷移では描画されなくなる)
+- テーマ配色は `theme.palette` のリスト指定で OS/ブラウザの `prefers-color-scheme` に連動して default/slate を自動切替(手動トグルなし)。extra.css にハードコード色を足す場合は、ファイル末尾の「slate(ダーク)配色の上書き」セクションに `[data-md-color-scheme="slate"]` の上書きも併せて追加すること(目録の Canvas 描画はページテーマと独立のため対象外)
 - 日本語ページ(md/json)を更新したら、隣の `.en.md` / `.en.json` も更新すること(保守原則3参照)
 - 404ページは `overrides/404.html`(Material テーマオーバーライド。`mkdocs.yml` の `theme.custom_dir: overrides`)で提供する。`docs/404.md` のような通常ページ方式では機能しない(MkDocs 本体にも mkdocs-static-i18n にも 404.md の特別扱いはなく、テーマの静的テンプレート `404.html` が常に優先される上、GitHub Pages はルートの `404.html` しか配信しないため)。本文リンクはルート相対 `/ai-kotohajime/...` 基準で書くこと(`site_url` のサブパスが変わったら要修正)
 
@@ -69,6 +71,9 @@ Material for MkDocs + 素のJS(ビルド工程なし・外部ライブラリ/CDN
 - B領域は職種別(医師/看護/薬学)タブで題材のみ差し替え、構造・クイズ・採点プロンプトは共通
 - 目録は公式な研修証憑ではない旨をサイトと目録画像の両方に明記
 - 英語版(i18n): mkdocs-static-i18n の suffix 方式(`.en.md`/`.en.json`)。クイズ合格・課題提出の進捗は言語間で共有。ブラウザ言語による自動振り分けは初回訪問時のみ(判定後は `aikotohajime.lang` に従う)。英語版実践課題の最低文字数は200。目録は和風意匠を維持し文言のみ英語化(要件定義書 §4.8)
+- ダークモード: OS/ブラウザ設定連動の自動切替のみで、手動トグルは付けない(ヘッダーUIをシンプルに保つ。Issue #11)
+- ユニットページの進捗表示: 進捗が一つもない学習者には何も表示しない軽量版(§1.3「シンプルに保つ」との両立。Issue #10)
+- Unit A-2 は画像生成の**仕組みの理解まで**(拡散モデルとLLMの原理対比+テキストベースの体験)。画像生成の実践演習は Phase 3(TBD)のスコープであり本ユニットでは扱わない(Issue #13)
 
 ## ドキュメント規約
 
