@@ -8,7 +8,7 @@
         "It prevents the conversation from proceeding with the AI having silently filled in missing assumptions with its own guesses",
         "It makes the AI feel faster to work with, since more back-and-forth exchanges take place",
         "The AI will remember your preferences from then on and apply them automatically next time",
-        "Simply giving the instruction automatically makes the output medically accurate"
+        "Simply giving that one instruction automatically guarantees that the output will be medically accurate"
       ],
       "answer": 0,
       "explanation": "When information is missing, the AI fills the gaps with guesses to produce its output. Having it ask questions first lets you draw out output based on the actual situation (audience, purpose, constraints) instead of guesswork. This is unrelated to guaranteeing accuracy or to the AI remembering things."
@@ -16,13 +16,13 @@
     {
       "q": "When having generative AI critique your own deliverable, which approach is most appropriate for drawing out candid feedback?",
       "choices": [
-        "Asking the AI to mention just the positive points, and to leave out anything critical",
+        "Asking the AI to mention only the positive points of the piece, and to leave out anything that sounds critical",
         "Specifying the role and format: \"as a strict reviewer, point out three important things to improve, in order, with reasons\"",
         "Showing it the same piece again and again, unchanged, until you get an evaluation you like",
         "Deciding that critique is something only a human expert should provide, not an AI, and skipping the step of asking the AI for feedback"
       ],
       "answer": 1,
-      "explanation": "Generative AI tends to respond favorably, so specifying a reviewer role, the number of points, and a requirement to state reasons draws out candid, concrete feedback instead of flattery."
+      "explanation": "Generative AI tends to respond favorably, so specifying a reviewer role, the number of points, and a requirement to state reasons makes concrete, critical feedback easier to draw out instead of flattery. Also specifying the aspects you want evaluated (structure, evidence, length, and so on) is even more effective."
     },
     {
       "q": "What is the most appropriate way to respond after receiving critique from the AI?",

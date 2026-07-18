@@ -55,7 +55,7 @@
         "To see whether the evaluation changes, show the same outline again and again without altering a single word of it"
       ],
       "answer": 2,
-      "explanation": "Generative AI tends to respond favorably to the user. Specifying a role as a critic, the number of points to raise, and a requirement to give reasons helps draw out candid, concrete feedback. Simply asking again or showing the same material repeatedly tends to produce similarly flattering praise."
+      "explanation": "Generative AI tends to respond favorably to the user. Specifying a role as a critic, the number of points to raise, and a requirement to give reasons makes concrete, critical feedback easier to draw out. Also specifying the aspects you want evaluated (structure, evidence, length, and so on) is even more effective. Simply asking again or showing the same material repeatedly tends to produce similarly flattering praise."
     }
   ]
 }
