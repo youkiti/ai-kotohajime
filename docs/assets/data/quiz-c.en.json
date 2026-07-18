@@ -16,7 +16,7 @@
     {
       "q": "Which of the following best explains why patient information must not be entered into a general-purpose, consumer-facing generative AI service?",
       "choices": [
-        "Because personal-information law prohibits handling patient information on electronic devices at all, outright and regardless of purpose",
+        "Because personal-information law prohibits handling patient information on electronic devices outright and regardless of purpose",
         "Because the connection to a general consumer service is not encrypted, so the content is intercepted by third parties while in transit",
         "Because the input is stored on the provider's server, may be used for training or quality improvement, and cannot be retracted by the user",
         "Because the patient information you enter is displayed to other users, exactly as written, on their answer screens immediately after you send it"
@@ -29,7 +29,7 @@
       "choices": [
         "Rework the case into a fictional one that keeps the teaching points, and use an organization-approved environment when real data is needed",
         "Replacing the name with initials, such as \"Mr. Y.H.\", is enough; the rest of the information can stay as it is",
-        "Entering it from a hospital computer instead of a personal device does not count as sending it externally at all",
+        "Entering it from a hospital computer instead of a personal device does not count as sending it externally",
         "For educational uses such as a study session, personal-information rules and policies do not apply, so it can be entered without anonymization"
       ],
       "answer": 0,
@@ -38,13 +38,13 @@
     {
       "q": "A nurse wants to use an illustration created by a generative AI in an in-hospital awareness poster. What is the most important consideration?",
       "choices": [
-        "Since AI-generated material never raises copyright concerns, it can be used freely without checking",
-        "All AI-generated material automatically becomes public domain, so citing the source is enough",
+        "Since AI-generated material is inherently free of copyright concerns, it can be used freely without checking",
+        "Any AI-generated material automatically becomes public domain, so citing the source is enough",
         "Check whether the output resembles an existing work, and also check the terms of service of the tool being used, before using it",
         "As long as the poster is clearly credited as AI-generated, no legal problem arises even if the image closely resembles an existing work"
       ],
       "answer": 2,
-      "explanation": "The output of a generative AI can sometimes closely resemble an existing work or character contained in its training data, and using it as-is could constitute copyright infringement. In addition, the conditions of use (for example, whether commercial use is allowed) are set out in each service's terms of service, so that also needs checking. The claims that AI-generated material never raises copyright issues (option 1), automatically becomes public domain (option 2), or that crediting it as AI-generated removes any legal problem even if it resembles an existing work (option 4) are all incorrect."
+      "explanation": "The output of a generative AI can sometimes closely resemble an existing work or character contained in its training data, and using it as-is could constitute copyright infringement. In addition, the conditions of use (for example, whether commercial use is allowed) are set out in each service's terms of service, so that also needs checking. The claims that AI-generated material is inherently free of copyright issues (option 1), automatically becomes public domain (option 2), or that crediting it as AI-generated removes any legal problem even if it resembles an existing work (option 4) are all incorrect."
     },
     {
       "q": "A resident wants to enter an entire chapter of a commercially published medical textbook into a generative AI, and print and distribute the resulting summary as a handout for an in-hospital study session. Which of the following best describes this action?",
@@ -60,7 +60,7 @@
     {
       "q": "A generative AI answered, \"According to the 2025 guideline of the XX Society, this treatment is considered first-line.\" What is the most appropriate response?",
       "choices": [
-        "Always check the guideline itself, confirming that it exists and that its content matches",
+        "Check the guideline itself, confirming that it exists and that its content matches",
         "Because a specific society name and year are given, it can be judged an accurate, real citation",
         "Ask the same AI, \"Is that really true?\" and trust the answer if it replies \"Yes, that is true\"",
         "Ask a different generative AI the same question, and consider the check complete if the same answer comes back"
@@ -71,19 +71,19 @@
     {
       "q": "Which of the following best describes bias in generative AI output?",
       "choices": [
-        "With the latest generative AI, bias arising during training has been completely eliminated as a technical matter",
+        "With the latest generative AI, bias arising during training has been eliminated as a technical matter",
         "Because biases from the training data, the prompt, and other factors can appear in the output, evaluate it on the premise that bias can arise",
-        "As long as the question is asked in Japanese, an unbiased answer well suited to actual conditions in Japan is always obtained",
+        "As long as the question is asked in Japanese, an unbiased answer well suited to actual conditions in Japan is obtained",
         "Bias is a problem unique to AI systems that generate images, and it does not occur in AI systems that generate text"
       ],
       "answer": 1,
-      "explanation": "Generative AI output can contain biases arising from many sources -- not only the training data but also the algorithm, the training process, how the prompt is written, and any reference material provided. It cannot be asserted that every single output contains bias, but output must be evaluated on the premise that bias can arise. Correct any bias you notice, for example by making explicit specifications in the prompt, and rely on human evaluation and review as the final check. The claim that bias has been completely eliminated as a technical matter (option 1) is incorrect, and asking in Japanese does not resolve bias either (option 3). Bias occurs in both AI that generates text and AI that generates images (option 4)."
+      "explanation": "Generative AI output can contain biases arising from many sources -- not only the training data but also the algorithm, the training process, how the prompt is written, and any reference material provided. It cannot be asserted that every single output contains bias, but output must be evaluated on the premise that bias can arise. Correct any bias you notice, for example by making explicit specifications in the prompt, and rely on human evaluation and review as the final check. The claim that bias has been eliminated as a technical matter (option 1) is incorrect, and asking in Japanese does not resolve bias either (option 3). Bias occurs in both AI that generates text and AI that generates images (option 4)."
     },
     {
       "q": "When an image-generation AI was asked several times to produce \"an illustration of a doctor and a nurse,\" the doctor was always drawn as a man and the nurse always as a woman. Which of the following best explains this phenomenon?",
       "choices": [
         "The AI looked up the actual staff composition of the user's own institution and drew that exact ratio accordingly",
-        "This is simply a neutral output that reflects real-world statistics accurately, without any bias at all",
+        "This is simply a neutral output that reflects real-world statistics accurately, without any bias whatsoever",
         "This is just a chance skew occurring this one time, and repeating the request many times will naturally produce a diverse mix",
         "This reflects a bias linking occupation and gender in the training data, correctable by specifying gender in the prompt"
       ],
@@ -91,7 +91,7 @@
       "explanation": "Training data contains many instances of biased associations such as \"doctor = male\" and \"nurse = female,\" and these statistical patterns tend to be carried through into the output; noticing this bias, correcting for it -- for instance, by explicitly specifying gender or diversity in the prompt -- and having a person review the material before distribution is the user's responsibility. The AI is not looking up the actual staff composition of any institution (option 1), and this cannot be called a neutral output that accurately reflects reality (option 2). Because the bias originates in the underlying data, repeating the request many times will not naturally resolve it (option 3)."
     },
     {
-      "q": "A pharmacist had a generative AI create patient medication guidance materials. Which combination of considerations is most appropriate for verification before distributing the materials?",
+      "q": "A pharmacist had a generative AI create patient medication guidance materials. Which approach to verification is most appropriate before distributing the materials?",
       "choices": [
         "Check whether the content matches the package insert, the wording suits the audience, and nothing could cause harm",
         "Check whether the character count matches the specification, whether there are typos, and whether the font reads well",
