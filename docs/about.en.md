@@ -19,6 +19,22 @@ This site is built on the following four principles.
 - Supervision structure: TBD (to be determined)
 - License: TBD (CC BY 4.0 is under consideration as a candidate)
 
+## Reporting Errors and Requesting Improvements { #report-issues }
+
+This site is developed as open source, and we accept reports of errors in the content (typos, broken links, inaccuracies, and so on) and requests for improvement through [Issues on the GitHub repository](https://github.com/youkiti/ai-kotohajime/issues). Please follow the steps below.
+
+1. **Check the existing issues** — Open the [issue list](https://github.com/youkiti/ai-kotohajime/issues) and check whether the same point has already been reported (no account is needed just to browse).
+2. **Create a new issue** — On the [new issue page](https://github.com/youkiti/ai-kotohajime/issues/new), fill in a title and description and submit it (posting requires a free GitHub account). You are welcome to write in either English or Japanese.
+3. **Include the following in your report**:
+    - The URL of the page concerned (or the unit/page name)
+    - What you noticed (typo / broken link / factual error / layout problem / suggestion)
+    - For display problems, the browser and device you are using
+
+!!! warning "Issues are public and visible to anyone"
+    Never include personal information — including any patient information — or anything else that cannot be made public in an issue.
+
+A contact channel for those without a GitHub account is in preparation (it will be set up once the operating entity is finalized).
+
 ## References We Drew On
 
 In planning this site, we drew on presentations from the symposium series "Generative AI and Healthcare Professional Education: Connecting Theory, Practice, and Ethics," hosted by the ICT Education Committee of the Japan Society for Medical Education (JSME).

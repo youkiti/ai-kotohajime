@@ -32,4 +32,4 @@
 
 ---
 
-本サイトはオープンソースで開発しています。ソースコードの閲覧、誤りの報告・要望は [GitHubリポジトリ(youkiti/ai-kotohajime)](https://github.com/youkiti/ai-kotohajime) からどうぞ。
+本サイトはオープンソースで開発しています。ソースコードの閲覧は [GitHubリポジトリ(youkiti/ai-kotohajime)](https://github.com/youkiti/ai-kotohajime) からどうぞ。誤りの報告・改善要望の手順は[このサイトについて](about.md#report-issues)をご覧ください。
