@@ -4,7 +4,7 @@
 
 This site is designed so that learners (residents, students, etc.) can study on their own, receive feedback, and self-issue a certificate (*mokuroku*) — all without anyone's help. All we ask of teachers and attending physicians is that you send learners a link like the one below.
 
-Right now, what you can actually try in the mock version is Area A ([Unit A-1](units/a1.md) and the [Area A quiz](quiz/a.md)) and Area B ([Unit B-1](units/b1.md), [Unit B-2](units/b2.md), and the [Area B quiz and practical exercise](quiz/b.md)).
+All three areas are currently available: Area A ([Unit A-1](units/a1.md) and the [Area A quiz](quiz/a.md)), Area B ([Unit B-1](units/b1.md), [Unit B-2](units/b2.md), and the [Area B quiz and practical exercise](quiz/b.md)), and Area C ([Unit C-1](units/c1.md), [Unit C-2](units/c2.md), and the [Area C quiz](quiz/c.md)).
 
 ## Sample Text for Assigning as Homework
 
