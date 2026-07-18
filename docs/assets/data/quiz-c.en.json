@@ -16,7 +16,7 @@
     {
       "q": "Which of the following best explains why patient information must not be entered into a general-purpose, consumer-facing generative AI service?",
       "choices": [
-        "Because personal-information law prohibits handling patient information on electronic devices at all, outright and regardless of purpose",
+        "Because personal-information law prohibits handling patient information on electronic devices outright and regardless of purpose",
         "Because the connection to a general consumer service is not encrypted, so the content is intercepted by third parties while in transit",
         "Because the input is stored on the provider's server, may be used for training or quality improvement, and cannot be retracted by the user",
         "Because the patient information you enter is displayed to other users, exactly as written, on their answer screens immediately after you send it"
@@ -29,7 +29,7 @@
       "choices": [
         "Rework the case into a fictional one that keeps the teaching points, and use an organization-approved environment when real data is needed",
         "Replacing the name with initials, such as \"Mr. Y.H.\", is enough; the rest of the information can stay as it is",
-        "Entering it from a hospital computer instead of a personal device does not count as sending it externally at all",
+        "Entering it from a hospital computer instead of a personal device does not count as sending it externally",
         "For educational uses such as a study session, personal-information rules and policies do not apply, so it can be entered without anonymization"
       ],
       "answer": 0,
@@ -71,13 +71,13 @@
     {
       "q": "Which of the following best describes bias in generative AI output?",
       "choices": [
-        "With the latest generative AI, bias arising during training has been completely eliminated as a technical matter",
+        "With the latest generative AI, bias arising during training has been eliminated as a technical matter",
         "Because biases from the training data, the prompt, and other factors can appear in the output, evaluate it on the premise that bias can arise",
-        "As long as the question is asked in Japanese, an unbiased answer well suited to actual conditions in Japan is always obtained",
+        "As long as the question is asked in Japanese, an unbiased answer well suited to actual conditions in Japan is obtained",
         "Bias is a problem unique to AI systems that generate images, and it does not occur in AI systems that generate text"
       ],
       "answer": 1,
-      "explanation": "Generative AI output can contain biases arising from many sources -- not only the training data but also the algorithm, the training process, how the prompt is written, and any reference material provided. It cannot be asserted that every single output contains bias, but output must be evaluated on the premise that bias can arise. Correct any bias you notice, for example by making explicit specifications in the prompt, and rely on human evaluation and review as the final check. The claim that bias has been completely eliminated as a technical matter (option 1) is incorrect, and asking in Japanese does not resolve bias either (option 3). Bias occurs in both AI that generates text and AI that generates images (option 4)."
+      "explanation": "Generative AI output can contain biases arising from many sources -- not only the training data but also the algorithm, the training process, how the prompt is written, and any reference material provided. It cannot be asserted that every single output contains bias, but output must be evaluated on the premise that bias can arise. Correct any bias you notice, for example by making explicit specifications in the prompt, and rely on human evaluation and review as the final check. The claim that bias has been eliminated as a technical matter (option 1) is incorrect, and asking in Japanese does not resolve bias either (option 3). Bias occurs in both AI that generates text and AI that generates images (option 4)."
     },
     {
       "q": "When an image-generation AI was asked several times to produce \"an illustration of a doctor and a nurse,\" the doctor was always drawn as a man and the nurse always as a woman. Which of the following best explains this phenomenon?",
