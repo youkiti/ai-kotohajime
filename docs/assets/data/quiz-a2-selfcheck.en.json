@@ -19,7 +19,7 @@
         "Image-generation AI checks against a medical textbook database each time it runs, so this kind of positional error cannot occur given how the mechanism works",
         "This error occurs only when the prompt is written poorly, and refining the prompt enough prevents it at the level of the mechanism",
         "A diffusion model is not a mechanism that verifies medical accuracy; it merely restores a plausible-looking image close to the instructions, so anatomical errors can occur",
-        "This kind of error is a bug limited to early image-generation models and rarely occurs in current models"
+        "This kind of error is a bug that was limited to early image-generation models, and it rarely if ever occurs in the current generation of models"
       ],
       "answer": 2,
       "explanation": "A diffusion model is not a mechanism that verifies medical accuracy as it builds an image; it merely removes noise to restore a plausible-looking image close to the instructions. As a result, even a polished-looking diagram can contain anatomical errors, such as organs being positioned incorrectly (the same idea as hallucination in text). The claim that it cross-references a medical textbook database each time, making this error impossible (option 1), the claim that a sufficiently refined prompt prevents the error at the level of the mechanism (option 2), and the claim that this is a bug limited to early models (option 4) are all inconsistent with how the mechanism works."

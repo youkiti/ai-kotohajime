@@ -6,12 +6,12 @@
       "q": "What does the \"3-second check\" performed before entering text into a generative AI actually cover?",
       "choices": [
         "Check for typos, whether the wording and level of politeness are appropriate, and whether the text is too long",
-        "Check whether it contains identifying details or information identifiable by combination, and whether real data is needed",
+        "Check whether it contains identifying details or information identifiable by combination, and whether real data is needed at all",
         "Check the AI's pricing plan, how fast it responds, and how congested the server currently is",
         "Check whether the time of entry is late at night in the first place, and whether you're using a public Wi-Fi network outside the hospital"
       ],
       "answer": 1,
-      "explanation": "The 3-second check before entering text covers three points: whether it contains information that could directly identify an individual, such as name, ID, date, or facility name; whether it contains information identifiable through a combination of details, such as a rare disease, age, and region; and whether real data actually needs to be entered at all, rather than a fictionalized or abstracted description. The formatting of the text (option 1), the pricing plan or response speed (option 3), and the time of day or network (option 4) are unrelated to protecting patient information."
+      "explanation": "The 3-second check before entering text covers three points: whether it contains information that could directly identify an individual, such as a name or ID; whether it contains information identifiable through a combination of details, such as dates, facility names, a rare disease, age, and region; and whether real data actually needs to be entered at all, rather than a fictionalized or abstracted description. The formatting of the text (option 1), the pricing plan or response speed (option 3), and the time of day or network (option 4) are unrelated to protecting patient information."
     },
     {
       "q": "A colleague says, \"I changed the patient's name to initials, so it should be fine to enter this into a generative AI.\" What is the most appropriate response to this statement?",
@@ -28,12 +28,12 @@
       "q": "Which of the following best describes what to do if you accidentally send text containing patient information to a general-purpose, consumer-facing generative AI?",
       "choices": [
         "Deleting the chat history right after sending makes it as if the message itself was never sent at all",
-        "Content that has reached the provider's server can never be retracted, so always report and consult per your organization's rules",
+        "Content that has reached the provider's server cannot be retracted, so report and consult according to your organization's rules",
         "As long as the AI has not yet replied, the send has not actually gone through, so there is no problem here",
         "Content sent on a free plan is, by policy, never stored anywhere, so nothing further needs to be done"
       ],
       "answer": 1,
-      "explanation": "Once content is sent, it has already reached the provider's server at that moment, and no action by the user -- such as deleting chat history -- can retract the send itself (options 1 and 3 are incorrect). On a free plan, the input may actually be more likely to be used for training or similar purposes (option 4 is incorrect). This is precisely why checking before sending is the most important safeguard, and if a mistaken send does occur, the appropriate response is to promptly report and consult according to your organization's rules on handling personal information, rather than concealing it."
+      "explanation": "Once content is sent, it has already reached the provider's server at that moment, and no action by the user -- such as deleting chat history -- can retract the send itself (options 1 and 3 are incorrect). Whether input is stored or used for training depends on the service, its settings, and its terms -- not on whether the plan is free or paid -- so the premise that free-plan content is never stored is incorrect (option 4). This is precisely why checking before sending is the most important safeguard, and if a mistaken send does occur, the appropriate response is to promptly report and consult according to your organization's rules on handling personal information, rather than concealing it."
     }
   ]
 }

@@ -11,7 +11,7 @@
         "It accesses the internet each time it is asked a question and simply summarizes the content of the latest page"
       ],
       "answer": 0,
-      "explanation": "An LLM learns statistical patterns from a huge volume of pre-training text, and generates continuations by probabilistically selecting the 'most likely next word' given the input context. It does not convert what it learned into a database and search it for matching passages (option 2), nor does it select from a fixed set of response templates (option 3). More and more services do combine an LLM with a web-search feature, but even then the response is not simply a summary of the latest page returned as-is -- the LLM generates the text anew each time, using the search results as material (option 4)."
+      "explanation": "An LLM learns statistical patterns from a huge volume of pre-training text, and generates continuations by probabilistically selecting the 'most likely next word' given the input context (strictly speaking, it predicts in units called 'tokens', which are smaller than words). It does not convert what it learned into a database and search it for matching passages (option 2), nor does it select from a fixed set of response templates (option 3). More and more services do combine an LLM with a web-search feature, but even then the response is not simply a summary of the latest page returned as-is -- the LLM generates the text anew each time, using the search results as material (option 4)."
     },
     {
       "q": "A resident entered the same question into a generative AI twice, opening a fresh conversation (chat) each time, and the second response came back somewhat different from the first. Which of the following best explains this?",
@@ -22,18 +22,18 @@
         "Because a built-in anti-plagiarism feature deliberately varies the content of the answer on every request"
       ],
       "answer": 1,
-      "explanation": "Most generative AI systems don't simply choose the single highest-probability word each time; they build in a degree of variability (sampling). That's why the same input doesn't always produce exactly the same text. A single exchange does not retrain the underlying model or improve its performance (option 1), server congestion did not degrade the quality of the answer (option 3), and there is no anti-plagiarism feature that deliberately varies the content on every request (option 4)."
+      "explanation": "Most generative AI systems don't simply choose the single highest-probability word each time; they build in a degree of variability (sampling). That's why the same input doesn't always produce exactly the same text. A single exchange does not retrain the underlying model or improve its performance (option 1), server congestion did not degrade the quality of the answer (option 3), and there is no anti-plagiarism feature that deliberately varies the content on every request (option 4). Note that if you re-ask within the same chat, the preceding exchange (the context) also influences the output, so both sampling and context can contribute to the difference."
     },
     {
       "q": "A colleague explained that \"generative AI searches a huge medical literature database and returns the matching passage as a direct quotation.\" Which of the following is the most appropriate response to this explanation?",
       "choices": [
         "It uses basically the same underlying technology as a web search engine, so as a description of the mechanism the explanation contains no major error",
         "Generative AI holds no database of any kind internally, so the correct point is that it should be unable to answer any medical question in the first place",
-        "Rather than searching, the LLM itself generates each word in turn from learned patterns, and even when a search feature is used the response is not necessarily a quotation of an existing passage",
+        "Rather than searching, the LLM itself always generates each word anew from learned patterns, and even when a search feature is used the response is not necessarily a quotation of an existing passage",
         "It always provides the URL of the primary source it consulted with every answer, so the only real flaw in the explanation is the missing source citations"
       ],
       "answer": 2,
-      "explanation": "The LLM itself does not search a literature database and quote the matching passage; based on patterns it acquired for plausible ways to continue a passage, it newly generates text each time. Many services now combine an LLM with a web-search feature, but even then the response text is generated on the spot and is not necessarily a verbatim quotation of any real, existing passage. The claim that it uses basically the same technology as a search engine (option 1), the claim that it should be unable to answer any medical question at all (option 2), and the claim that it always provides a primary-source URL with every answer (option 4) are all inconsistent with how it actually works."
+      "explanation": "The LLM itself does not search a literature database and quote the matching passage; based on patterns it acquired for plausible ways to continue a passage, it newly generates text each time. Many services now combine an LLM with a web-search feature, but even then the response text is generated on the spot and is not necessarily a verbatim quotation of any real, existing passage -- and misattributed citations or errors in summarizing and integrating the retrieved material can also occur. The claim that it uses basically the same technology as a search engine (option 1), the claim that it should be unable to answer any medical question at all (option 2), and the claim that it always provides a primary-source URL with every answer (option 4) are all inconsistent with how it actually works."
     },
     {
       "q": "Which of the following best describes the basic mechanism of image-generation AI (diffusion models)?",
@@ -41,10 +41,10 @@
         "Just like text-generation AI, it predicts pixels one at a time using a next-word-prediction mechanism",
         "It converts existing images gathered during training into a database and displays a combination of the ones closest to the instructions",
         "It builds a three-dimensional model internally and renders it as a two-dimensional image from a given angle",
-        "It always follows the same process: starting from an image containing random noise and gradually removing that noise to restore it"
+        "It starts from an image of pure random noise and gradually removes that noise, step by step, to restore the image"
       ],
       "answer": 3,
-      "explanation": "A diffusion model works by starting from an image containing random noise and progressively removing that noise, restoring an image that approximates the given instructions. This differs from the word-by-word prediction mechanism of text-generation AI (option 1); it is not a matter of converting existing images into a database and combining them (option 2); nor does it involve building a 3D model internally (option 3)."
+      "explanation": "A diffusion model works by starting from an image containing random noise and progressively removing that noise, restoring an image that approximates the given instructions. This differs from the word-by-word prediction mechanism of text-generation AI (option 1); it is not a matter of converting existing images into a database and combining them (option 2); nor does it involve building a 3D model internally (option 3). Note that diffusion models are one representative approach to image generation, and they can also start from an existing image, as in image editing, rather than from pure noise."
     },
     {
       "q": "A nursing student said, \"Text-generation AI and image-generation AI that uses diffusion models work by the same mechanism.\" Which of the following is the most appropriate response to this statement?",
@@ -60,13 +60,13 @@
     {
       "q": "Which of the following, framed in terms of how LLMs work, best explains why generative AI can output factually incorrect information (hallucination) in a plausible-sounding way?",
       "choices": [
-        "AI does not search for correct information; it probabilistically generates plausible-sounding word sequences, so content that differs from fact can result",
-        "Because the AI's training data always lags several years behind, no matter the field, and that alone explains the errors",
-        "Because developers deliberately build in incorrect information across the board for performance-testing purposes",
-        "Hallucination is a malfunction limited to early prototype models and hardly ever occurs in any current generative AI"
+        "An LLM alone, without a search function, does not look up correct information; it probabilistically generates plausible word sequences, so content that differs from fact can result",
+        "Because the AI's training data always lags several years behind, no matter the field, and that alone explains every one of the errors",
+        "Because developers deliberately build incorrect information into the answers in advance, as part of testing to evaluate the model's performance",
+        "Hallucination is a malfunction limited to early prototype models, and it hardly ever occurs in any of the current generative AI systems"
       ],
       "answer": 0,
-      "explanation": "An LLM does not \"search for and return correct information\"; rather, it probabilistically generates a sequence of words that is contextually plausible. As a result, content that differs from fact (hallucination) can be generated plausibly as long as it is grammatically and contextually natural -- a trait that is inherently difficult to avoid given how the mechanism works. It is not because the training data always lags several years behind regardless of field (option 2), nor because developers deliberately build in incorrect information (option 3); and it is not a malfunction confined to early prototype models that hardly ever occurs today (option 4 is wrong)."
+      "explanation": "An LLM alone, without a search function, does not \"search for and return correct information\"; rather, it probabilistically generates a sequence of words that is contextually plausible. As a result, content that differs from fact (hallucination) can be generated plausibly as long as it is grammatically and contextually natural. In recent years, combining the model with search or external reference material (RAG) has become a common way to reduce hallucination, but misattributed citations and summarization errors remain possible, so verification is still needed. It is not because the training data always lags several years behind regardless of field (option 2), nor because developers deliberately build in incorrect information (option 3); and it is not a malfunction confined to early prototype models that hardly ever occurs today (option 4 is wrong)."
     },
     {
       "q": "A resident asked a generative AI, with its web-search feature turned off, to suggest some references, and it presented a paper with specific author names, a journal name, and even a volume/issue number. However, that paper did not actually exist. Which of the following best explains this situation?",
@@ -83,19 +83,19 @@
       "q": "Which of the following situations is most likely to lead to hallucination?",
       "choices": [
         "When asking about common terms that turn up throughout textbooks and the literature, such as \"hypertension\" or \"diabetes\"",
-        "When exchanging casual small talk that has nothing at all to do with medicine, such as greetings or brief comments about the local weather",
+        "When exchanging casual small talk that has nothing at all to do with medicine, such as greetings or brief comments about the local weather that day",
         "Only on the very first question you happen to ask on the day you newly start using that particular AI account",
-        "When asking about matters that appear infrequently in the training data and are therefore prone to being vague, such as minor proper nouns"
+        "When asking about matters that appear infrequently in the training data and are prone to being vague, such as minor proper nouns or specific figures"
       ],
       "answer": 3,
-      "explanation": "Hallucination is especially likely to occur when you ask about matters prone to being vague -- minor proper nouns and other things that appear infrequently in the training data. It tends to be relatively stable for common terms that recur throughout textbooks and the literature (option 1) or for casual small talk unrelated to medicine (option 2), and it is not an effect limited to the very first question asked on the day you start using a given AI account (option 3)."
+      "explanation": "Hallucination is especially likely to occur when you ask about matters prone to being vague -- minor proper nouns, specific figures, and other things that appear infrequently in the training data. It tends to be relatively stable for common terms that recur throughout textbooks and the literature (option 1) or for casual small talk unrelated to medicine (option 2), and it is not an effect limited to the very first question asked on the day you start using a given AI account (option 3)."
     },
     {
       "q": "Which of the following correctly describes what generative AI can create?",
       "choices": [
         "It can only generate text; it is unable to produce images, audio, or program code of any kind whatsoever, according to this claim",
         "Some generative AI can produce a variety of formats beyond text, including images, slide drafts, program code, and audio",
-        "It is designed exclusively for generating audio and lacks any text-generation capability whatsoever",
+        "It is designed exclusively for generating audio, and lacks any capability to generate text or program code whatsoever",
         "It can generate video and still images, but lacks the capability to summarize a long passage of text"
       ],
       "answer": 1,
@@ -105,12 +105,12 @@
       "q": "A nurse is considering how to use generative AI in their work. Which of the following is the most appropriate example?",
       "choices": [
         "Entering a discharge summary as-is, including the patient's real name and chart number, to have the AI produce a summary",
-        "Using AI-generated medical content directly for a patient explanation without checking it",
-        "Having the AI draft an in-hospital training document containing no patient information, and always personally checking and revising the final content",
-        "Letting the final decision on a patient's treatment plan proceed exactly as the generative AI proposed, without checking it"
+        "Using an AI-generated medical explanation directly in an explanation to a patient, without checking the content at all",
+        "Having the AI draft an in-hospital training document containing no patient information, then checking and revising the final content yourself",
+        "Letting the final decision on a patient's treatment plan proceed exactly as the generative AI proposed, without checking any of the content yourself"
       ],
       "answer": 2,
-      "explanation": "Having the AI draft an in-hospital document containing no patient information, then always personally checking and revising the final content before use, is an example of an appropriate professional use of generative AI. On the other hand, entering a patient's real name and chart number as-is (option 1), using AI-generated content directly for a patient explanation without checking it (option 2), and letting the final treatment-plan decision proceed exactly as the AI proposed without checking it (option 4) are all problematic from a safety and ethical standpoint."
+      "explanation": "Having the AI draft an in-hospital document containing no patient information, then personally checking and revising the final content before use, is an example of an appropriate professional use of generative AI. On the other hand, entering a patient's real name and chart number as-is (option 1), using AI-generated content directly for a patient explanation without checking it (option 2), and letting the final treatment-plan decision proceed exactly as the AI proposed without checking it (option 4) are all problematic from a safety and ethical standpoint."
     }
   ]
 }
